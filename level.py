@@ -2,7 +2,8 @@ import pygame
 from settings import *
 from tile import Tile
 from player import Player
-from utils import import_csv_layout
+from utils import import_csv_layout, import_folder
+import random
 
 
 class Level:
@@ -32,6 +33,10 @@ class Level:
             'object': import_csv_layout('map/map_LargeObjects.csv'),
         }
 
+        graphics = {
+            'grass': import_folder('graphics/grass'),
+        }
+
         for style, layout in layouts.items():
             for row_idx, row in enumerate(layout):
                 for col_idx, cell in enumerate(row):
@@ -45,10 +50,9 @@ class Level:
                         Tile((x, y), [self.obstacle_sprites], 'boundary')
 
                     if style == 'grass':
-                        pass
+                        random_grass_surface = random.choice(graphics['grass'])
+                        Tile((x, y), [self.visible_sprites], 'grass', random_grass_surface)
 
-                    if style == 'object':
-                        pass
 
     def run(self):
         # update and draw the game
