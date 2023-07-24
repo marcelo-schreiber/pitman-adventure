@@ -53,7 +53,6 @@ class Level:
                         random_grass_surface = random.choice(graphics['grass'])
                         Tile((x, y), [self.visible_sprites], 'grass', random_grass_surface)
 
-
     def run(self):
         # update and draw the game
         self.visible_sprites.custom_draw(self.player)
