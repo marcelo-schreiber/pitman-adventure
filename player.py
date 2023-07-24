@@ -1,19 +1,21 @@
 import pygame
 from settings import *
+from random import randint
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, groups, obstacle_sprites):
+    def __init__(self, pos, groups, obstacle_sprites, grass_sprites):
         super().__init__(groups)
         self.image = pygame.image.load('images/tile.png').convert_alpha()
         self.image = pygame.transform.scale(self.image, (TILESIZE, TILESIZE))
         self.rect = self.image.get_rect(topleft=pos)
         self.hitbox = self.rect.inflate(0, -26)
-
+        self.grass_sprites = grass_sprites
         self.direction = pygame.math.Vector2()
-        self.speed = 5
+        self.speed = 7
 
         self.obstacle_sprites = obstacle_sprites
+        self.chance_of_encounter_per_tick = 1 / (3 * FPS)  # 1 encounter per 3 seconds moving (60 FPS)
 
     def input(self):
         keys = pygame.key.get_pressed()
@@ -59,6 +61,18 @@ class Player(pygame.sprite.Sprite):
                     if self.direction.y < 0:  # moving up
                         self.hitbox.top = sprite.hitbox.bottom
 
+    def random_encounter(self):
+        is_colliding = pygame.sprite.spritecollideany(self, self.grass_sprites)
+        is_moving = self.direction.magnitude() != 0
+
+        if is_colliding and is_moving:
+            range_of_numbers = 1 / self.chance_of_encounter_per_tick
+            random_encounter = randint(1, range_of_numbers)
+
+            if random_encounter == 1:
+                print('random pokemon encounter')
+
     def update(self):
         self.input()
         self.move(self.speed)
+        self.random_encounter()

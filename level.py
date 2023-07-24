@@ -10,30 +10,35 @@ class Level:
     def __init__(self):
 
         # get the display surface
-        self.player = None
         self.display_surface = pygame.display.get_surface()
 
         # sprite group setup
         self.visible_sprites = YSortCameraGroup()
         self.obstacle_sprites = pygame.sprite.Group()
+        self.grass_sprites = pygame.sprite.Group() # for random encounter
 
         # sprite setup
-        self.initialize_player()
         self.create_map()
 
+        self.player = None
+        self.initialize_player()
+
     def initialize_player(self):
-        player_initial_x = 2000
-        player_initial_y = 1430
-        self.player = Player((player_initial_x, player_initial_y), [self.visible_sprites], self.obstacle_sprites)
+        player_initial_x = 1950
+        player_initial_y = 1350
+
+        self.player = Player((player_initial_x, player_initial_y),
+                             [self.visible_sprites], self.obstacle_sprites, self.grass_sprites)
 
     def create_map(self):
-        layouts = {
+        layouts = {  # list of layouts (collision, visuals, etc)
             'boundary': import_csv_layout('map/map_FloorBlocks.csv'),
             'grass': import_csv_layout('map/map_Grass.csv'),
             'object': import_csv_layout('map/map_LargeObjects.csv'),
+            'details': import_csv_layout('map/map_Details.csv'),
         }
 
-        graphics = {
+        graphics = {  # list of images
             'grass': import_folder('graphics/grass'),
         }
 
@@ -48,10 +53,12 @@ class Level:
 
                     if style == 'boundary':
                         Tile((x, y), [self.obstacle_sprites], 'boundary')
+                    if style == 'object':
+                        Tile((x, y), [self.obstacle_sprites], 'object')
 
                     if style == 'grass':
                         random_grass_surface = random.choice(graphics['grass'])
-                        Tile((x, y), [self.visible_sprites], 'grass', random_grass_surface)
+                        Tile((x, y), [self.visible_sprites, self.grass_sprites], 'grass', random_grass_surface)
 
     def run(self):
         # update and draw the game
