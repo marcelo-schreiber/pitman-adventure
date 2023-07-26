@@ -4,7 +4,7 @@ import math
 from settings import *
 import time
 from enemy import Enemy
-import random
+from random import random
 
 
 class Cutscene:
@@ -226,7 +226,7 @@ class BattleCutscene(Cutscene):
         move = self.enemy.attack()  # returns a random move from the moves dict
 
         # random float between 0 and 1
-        chance = random.random()
+        chance = random()
 
         if chance < move['accuracy']:
             # hit
