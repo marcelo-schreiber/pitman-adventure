@@ -81,6 +81,7 @@ class Player(pygame.sprite.Sprite):
         enemy = Enemy(100)
         cutscene = BattleCutscene(self, 'images/tile.png', 'graphics/monsters/bamboo/attack/0.png', enemy.hp)
         cutscene.play()
+        print(cutscene.winner)
 
     def update(self):
         self.input()

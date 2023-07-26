@@ -103,13 +103,6 @@ class Cutscene:
             else:
                 pygame.draw.rect(self.screen, i.image, i.rect)
 
-    def write_texts(self):
-        for i in self.texts:
-            self.screen.blit(
-                self.font.render(i.text, True, i.color),
-                self.calculate_text_position(i.text, i.x, i.y),
-            )
-
     def calculate_text_position(self, text, x, y):
         text_width, text_height = self.font.size(text)
         return x - text_width / 2, y - text_height / 2
@@ -166,6 +159,7 @@ class BattleCutscene(Cutscene):
 
         self.displaying_specific_text = False
         self.specific_text = ""
+        self.winner = None
 
     @staticmethod
     def get_player_input():
@@ -201,7 +195,6 @@ class BattleCutscene(Cutscene):
         self.next_turn()
 
     def update(self):
-
         move = self.get_player_input()
 
         if self.turn % 2 == 0:
@@ -212,9 +205,12 @@ class BattleCutscene(Cutscene):
 
         if self.player.hp <= 0:
             self.is_running = False
+            self.winner = 'enemy'
             print('You lose!')
+
         elif self.enemy.hp <= 0:
             self.is_running = False
+            self.winner = 'player'
             print('You win!')
 
     def update_action_text(self, text: str):
