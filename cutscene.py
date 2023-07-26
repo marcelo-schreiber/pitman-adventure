@@ -156,7 +156,7 @@ class BattleCutscene(Cutscene):
         if move is None:
             return
 
-        chance = random.random()
+        chance = random()
 
         if chance < self.moves[move]['accuracy']:
             if self.moves[move]['damage'] < 0:
@@ -238,7 +238,6 @@ class BattleCutscene(Cutscene):
                 self.update_action_text(f'Enemy used {move["name"]} healing for {-move["damage"]} health!')
             else:
                 self.player.hp -= move['damage']
-                self.player_sprite.hp -= move['damage']
                 self.update_action_text(f'Enemy used {move["name"]} for {move["damage"]} damage!')
         else:
             # miss
