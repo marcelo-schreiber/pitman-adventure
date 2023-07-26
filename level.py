@@ -15,7 +15,7 @@ class Level:
         # sprite group setup
         self.visible_sprites = YSortCameraGroup()
         self.obstacle_sprites = pygame.sprite.Group()
-        self.grass_sprites = pygame.sprite.Group() # for random encounter
+        self.grass_sprites = pygame.sprite.Group()  # for random encounter
 
         # sprite setup
         self.create_map()

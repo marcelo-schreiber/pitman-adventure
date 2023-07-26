@@ -217,10 +217,12 @@ class BattleCutscene(Cutscene):
         enemy_bar_width = int(enemy_hp_ratio * 200)
 
         # Draw player's HP bar
-        pygame.draw.rect(self.screen, (0, 255, 0), pygame.Rect(self.player.rect.x - 40, self.player.rect.y - 40, player_bar_width, 20))
+        pygame.draw.rect(self.screen, (0, 255, 0), pygame.Rect(self.player.rect.x - 40,
+                                                               self.player.rect.y - 40, player_bar_width, 20))
 
         # Draw enemy's HP bar
-        pygame.draw.rect(self.screen, (255, 0, 0), pygame.Rect(self.enemy.rect.x - 40, self.enemy.rect.y - 40, enemy_bar_width, 20))
+        pygame.draw.rect(self.screen, (255, 0, 0), pygame.Rect(self.enemy.rect.x - 40,
+                                                               self.enemy.rect.y - 40, enemy_bar_width, 20))
 
     def enemy_attack(self):
         move = self.enemy.attack()  # returns a random move from the moves dict
@@ -236,6 +238,7 @@ class BattleCutscene(Cutscene):
                 self.update_action_text(f'Enemy used {move["name"]} healing for {-move["damage"]} health!')
             else:
                 self.player.hp -= move['damage']
+                self.player_sprite.hp -= move['damage']
                 self.update_action_text(f'Enemy used {move["name"]} for {move["damage"]} damage!')
         else:
             # miss
