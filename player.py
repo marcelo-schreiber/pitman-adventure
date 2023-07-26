@@ -19,7 +19,7 @@ class Player(pygame.sprite.Sprite):
         self.speed = 7
 
         self.obstacle_sprites = obstacle_sprites
-        self.chance_of_encounter_per_tick = 1 / (0.5 * FPS)  # 1 encounter per 3 seconds moving (60 FPS)
+        self.chance_of_encounter_per_tick = 1 / (3 * FPS)  # 1 encounter per 3 seconds moving (60 FPS)
 
     def input(self):
         keys = pygame.key.get_pressed()

@@ -9,12 +9,14 @@ from random import random
 
 class Cutscene:
     def __init__(self):
+        self.displaying_specific_text = None
+        self.specific_text = None
         self.is_running = True
         self.screen = pygame.display.get_surface()
         self.actors = []
         self.texts = []
         self.clock = pygame.time.Clock()
-        self.font = pygame.font.SysFont("Arial", 30)
+        self.font = pygame.font.Font("font/PressStart2P-Regular.ttf", 18)
 
     class Actor(Enemy):
         def __init__(self, name: str, x: int, y: int, width: int, height: int, enemy_hp=100):
@@ -42,6 +44,31 @@ class Cutscene:
         actor = self.Actor(name, x, y, width, height, enemy_hp)
         self.actors.append(actor)
         return actor
+
+    def display_specific_text_slowly(self, text: str, x: int, y: int, color: str, speed=50):
+        text_obj = self.create_text("", x, y, color)
+        self.specific_text = text
+        self.displaying_specific_text = True
+
+        for char in text:
+            text_obj.text += char
+            text_obj.x += self.get_text_size(char)[0] // 2
+            self.screen.fill("black")
+            self.background('images/background_battle_image.jpg')
+            self.draw()
+            self.write_texts()
+            self.update_screen()
+            pygame.time.delay(speed)
+        self.displaying_specific_text = False
+
+    def write_texts(self):
+        for i in self.texts:
+            if self.displaying_specific_text and i.text == self.specific_text:
+                continue  # Skip drawing the specific text if displaying_specific_text is True
+            self.screen.blit(
+                self.font.render(i.text, True, i.color),
+                self.calculate_text_position(i.text, i.x, i.y),
+            )
 
     def create_text(self, string, x: int, y: int, color: str):
         text = self.Text(string, x, y, color)
@@ -110,7 +137,7 @@ class Cutscene:
                         self.is_running = False
 
             self.screen.fill("black")
-            self.background('images/background_battle.png')
+            self.background('images/background_battle_image.jpg')
             self.draw()
             self.write_texts()
             self.update_screen()
@@ -124,18 +151,21 @@ class BattleCutscene(Cutscene):
         super().__init__()
         self.player_sprite = player
 
-        self.player = self.create_actor(player_img, 350, 550, 100, 100, player.hp)
-        self.enemy = self.create_actor(enemy_img, 900, 220, 100, 100, enemy_hp)
+        self.player = self.create_actor(player_img, 350, 500, 100, 100, player.hp)
+        self.enemy = self.create_actor(enemy_img, 820, 285, 100, 100, enemy_hp)
         self.turn = 0
         self.moves = moves
 
-        self.create_text("Choose your move:", 150, 100, 'white')
-        self.create_text("1. Weak", 150, 150, 'white')
-        self.create_text("2. Medium", 150, 200, 'white')
-        self.create_text("3. Strong", 150, 250, 'white')
-        self.create_text("4. Heal", 150, 300, 'white')
+        self.create_text("Choose your move:", 200, 100, 'white')
+        self.create_text("1. Weak", 200, 150, 'white')
+        self.create_text("2. Medium", 200, 200, 'white')
+        self.create_text("3. Strong", 200, 250, 'white')
+        self.create_text("4. Heal", 200, 300, 'white')
         self.action_text: str = ""
         self.timer = 1 * FPS
+
+        self.displaying_specific_text = False
+        self.specific_text = ""
 
     @staticmethod
     def get_player_input():
@@ -194,11 +224,10 @@ class BattleCutscene(Cutscene):
         self.draw_action_text()
 
     def draw_action_text(self):
-        # if text contains enemy, draw red
         if 'Enemy' in self.action_text:
-            self.create_text(self.action_text, 600, 400, 'red')
+            self.display_specific_text_slowly(self.action_text, 200, 400, 'red', 20)
         else:
-            self.create_text(self.action_text, 200, 400, 'white')
+            self.display_specific_text_slowly(self.action_text, 200, 400, 'white', 20)
 
     def draw(self):
         for i in self.actors:
@@ -217,12 +246,16 @@ class BattleCutscene(Cutscene):
         enemy_bar_width = int(enemy_hp_ratio * 200)
 
         # Draw player's HP bar
-        pygame.draw.rect(self.screen, (0, 255, 0), pygame.Rect(self.player.rect.x - 40,
-                                                               self.player.rect.y - 40, player_bar_width, 20))
-
+        pygame.draw.rect(self.screen, 'green', pygame.Rect(self.player.rect.x - 40,
+                                                           self.player.rect.y - 40, player_bar_width, 20))
+        player_hp = self.font.render(f'{self.player.hp}/{self.player.max_hp}', True, 'white')
         # Draw enemy's HP bar
-        pygame.draw.rect(self.screen, (255, 0, 0), pygame.Rect(self.enemy.rect.x - 40,
-                                                               self.enemy.rect.y - 40, enemy_bar_width, 20))
+        pygame.draw.rect(self.screen, 'red', pygame.Rect(self.enemy.rect.x - 40,
+                                                         self.enemy.rect.y - 40, enemy_bar_width, 20))
+        enemy_hp = self.font.render(f'{self.enemy.hp}/{self.enemy.max_hp}', True, 'white')
+
+        self.screen.blit(player_hp, (self.player.rect.x - 40, self.player.rect.y - 70))  # Player HP text
+        self.screen.blit(enemy_hp, (self.enemy.rect.x - 40, self.enemy.rect.y - 70))  # Enemy HP text
 
     def enemy_attack(self):
         move = self.enemy.attack()  # returns a random move from the moves dict
