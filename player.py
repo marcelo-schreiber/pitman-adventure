@@ -1,6 +1,8 @@
 import pygame
 from settings import *
 from random import randint
+from enemy import Enemy
+from cutscene import BattleCutscene
 
 
 class Player(pygame.sprite.Sprite):
@@ -10,12 +12,14 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (TILESIZE, TILESIZE))
         self.rect = self.image.get_rect(topleft=pos)
         self.hitbox = self.rect.inflate(0, -26)
+        self.hp = 100
+        self.max_hp = 100
         self.grass_sprites = grass_sprites
         self.direction = pygame.math.Vector2()
         self.speed = 7
 
         self.obstacle_sprites = obstacle_sprites
-        self.chance_of_encounter_per_tick = 1 / (3 * FPS)  # 1 encounter per 3 seconds moving (60 FPS)
+        self.chance_of_encounter_per_tick = 1 / (0.5 * FPS)  # 1 encounter per 3 seconds moving (60 FPS)
 
     def input(self):
         keys = pygame.key.get_pressed()
@@ -70,7 +74,13 @@ class Player(pygame.sprite.Sprite):
             random_encounter = randint(1, range_of_numbers)
 
             if random_encounter == 1:
-                print('random pokemon encounter')
+                self.battle()
+
+    def battle(self):
+        print('battle')
+        enemy = Enemy(100)
+        cutscene = BattleCutscene(self, 'images/tile.png', 'graphics/monsters/bamboo/attack/0.png', enemy.hp)
+        cutscene.play()
 
     def update(self):
         self.input()
