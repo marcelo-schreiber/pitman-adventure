@@ -181,9 +181,10 @@ class BattleCutscene(Cutscene):
             return
 
         chance = random()
+        is_heal = self.moves[move]['damage'] < 0
 
         if chance < self.moves[move]['accuracy']:
-            if self.moves[move]['damage'] < 0:
+            if is_heal:
                 self.player.hp -= self.moves[move]['damage']
                 self.update_action_text(f'You used {self.moves[move]["name"]} for {-self.moves[move]["damage"]} hp!')
             else:
@@ -293,4 +294,4 @@ class BattleCutscene(Cutscene):
     def next_turn(self):
         print(f'Player HP: {self.player.hp}')
         print(f'Enemy HP: {self.enemy.hp}')
-        self.turn += 1
+        self.turn += 1  # why a function for this? IDK but it's here now
