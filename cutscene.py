@@ -232,10 +232,10 @@ class BattleCutscene(Cutscene):
             else:
                 pygame.draw.rect(self.screen, i.image, i.rect)
 
-        self.draw_hp_bars()  # Add this line to draw the HP bars
+        self.draw_hp_hud()  # Add this line to draw the HP bars
 
     @staticmethod
-    def hp_color_from_ratio(ratio=1):
+    def hp_color_from_ratio(ratio: float):
         if ratio > 0.6:
             return 'green'
         elif ratio > 0.3:
@@ -243,27 +243,31 @@ class BattleCutscene(Cutscene):
         else:
             return 'red'
 
-    def draw_hp_bars(self):
+    def draw_hp_hud(self):
         player_hp_ratio = self.player.hp / self.player.max_hp
         enemy_hp_ratio = self.enemy.hp / self.enemy.max_hp
 
-        player_bar_width = int(player_hp_ratio * 100)
-        enemy_bar_width = int(enemy_hp_ratio * 100)
-
         # Draw player's HP bar
-        pygame.draw.rect(self.screen, self.hp_color_from_ratio(player_hp_ratio),
-                         pygame.Rect(self.player.rect.x - 40, self.player.rect.y - 40, player_bar_width * 2, 20))
+        self.draw_hp_bars(player_hp_ratio, self.player.rect.x, self.player.rect.y)
 
+        # Create text for player's HP
         player_hp = self.font.render(f'{self.player.hp}/{self.player.max_hp}', True, 'white')
 
         # Draw enemy's HP bar
-        pygame.draw.rect(self.screen, self.hp_color_from_ratio(enemy_hp_ratio),
-                         pygame.Rect(self.enemy.rect.x - 40, self.enemy.rect.y - 40, enemy_bar_width * 2, 20))
+        self.draw_hp_bars(enemy_hp_ratio, self.enemy.rect.x, self.enemy.rect.y)
 
+        # Create text for enemy's HP
         enemy_hp = self.font.render(f'{self.enemy.hp}/{self.enemy.max_hp}', True, 'white')
 
+        # Blit the text onto the screen
         self.screen.blit(player_hp, (self.player.rect.x - 40, self.player.rect.y - 70))  # Player HP text
         self.screen.blit(enemy_hp, (self.enemy.rect.x - 40, self.enemy.rect.y - 70))  # Enemy HP text
+
+    def draw_hp_bars(self, ratio: float, x: int, y: int):
+        bar_width = int(ratio * 100)
+
+        pygame.draw.rect(self.screen, self.hp_color_from_ratio(ratio),
+                         pygame.Rect(x - 40, y - 40, bar_width * 2, 20))
 
     def enemy_attack(self):
         move = self.enemy.attack()  # returns a random move from the moves dict
