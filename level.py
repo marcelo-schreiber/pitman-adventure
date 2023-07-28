@@ -24,8 +24,8 @@ class Level:
         self.initialize_player()
 
     def initialize_player(self):
-        player_initial_x = 1950
-        player_initial_y = 1350
+        player_initial_x = TILESIZE * 10
+        player_initial_y = TILESIZE * 6
 
         self.player = Player((player_initial_x, player_initial_y),
                              [self.visible_sprites], self.obstacle_sprites, self.grass_sprites)
@@ -63,6 +63,7 @@ class Level:
     def run(self):
         # update and draw the game
         self.visible_sprites.custom_draw(self.player)
+
         self.visible_sprites.update()
 
 
@@ -75,8 +76,13 @@ class YSortCameraGroup(pygame.sprite.Group):
         self.half_height = self.display_surface.get_size()[1] // 2
         self.offset = pygame.math.Vector2()
 
+        layout = import_csv_layout('map/map_FloorBlocks.csv')
         # create floor
         self.floor_surface = pygame.image.load('tilemap/ground.png').convert()
+        # scale to layout size * TILE_SIZE
+        self.floor_surface = pygame.transform.scale(self.floor_surface,
+                                                    (len(layout[0]) * TILESIZE, len(layout) * TILESIZE))
+
         self.floor_rect = self.floor_surface.get_rect(topleft=(0, 0))
 
     def custom_draw(self, player):
