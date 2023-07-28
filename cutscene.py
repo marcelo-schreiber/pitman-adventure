@@ -234,20 +234,32 @@ class BattleCutscene(Cutscene):
 
         self.draw_hp_bars()  # Add this line to draw the HP bars
 
+    @staticmethod
+    def hp_color_from_ratio(ratio=1):
+        if ratio > 0.6:
+            return 'green'
+        elif ratio > 0.3:
+            return 'yellow'
+        else:
+            return 'red'
+
     def draw_hp_bars(self):
         player_hp_ratio = self.player.hp / self.player.max_hp
         enemy_hp_ratio = self.enemy.hp / self.enemy.max_hp
 
-        player_bar_width = int(player_hp_ratio * 200)
-        enemy_bar_width = int(enemy_hp_ratio * 200)
+        player_bar_width = int(player_hp_ratio * 100)
+        enemy_bar_width = int(enemy_hp_ratio * 100)
 
         # Draw player's HP bar
-        pygame.draw.rect(self.screen, 'green', pygame.Rect(self.player.rect.x - 40,
-                                                           self.player.rect.y - 40, player_bar_width, 20))
+        pygame.draw.rect(self.screen, self.hp_color_from_ratio(player_hp_ratio),
+                         pygame.Rect(self.player.rect.x - 40, self.player.rect.y - 40, player_bar_width * 2, 20))
+
         player_hp = self.font.render(f'{self.player.hp}/{self.player.max_hp}', True, 'white')
+
         # Draw enemy's HP bar
-        pygame.draw.rect(self.screen, 'red', pygame.Rect(self.enemy.rect.x - 40,
-                                                         self.enemy.rect.y - 40, enemy_bar_width, 20))
+        pygame.draw.rect(self.screen, self.hp_color_from_ratio(enemy_hp_ratio),
+                         pygame.Rect(self.enemy.rect.x - 40, self.enemy.rect.y - 40, enemy_bar_width * 2, 20))
+
         enemy_hp = self.font.render(f'{self.enemy.hp}/{self.enemy.max_hp}', True, 'white')
 
         self.screen.blit(player_hp, (self.player.rect.x - 40, self.player.rect.y - 70))  # Player HP text
