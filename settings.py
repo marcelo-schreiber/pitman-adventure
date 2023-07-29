@@ -1,7 +1,7 @@
 WIDTH = 1280
 HEIGHT = 720
 FPS = 60
-TILESIZE = 64
+TILESIZE = 75
 
 WORLD_MAP = [
     ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'],
