@@ -18,7 +18,6 @@ on:
   push:
     branches: [master]
   pull_request:
-    branches-ignore: [master]
     # Remove the line above to run when pull-requesting to master
 
 ###############
@@ -48,6 +47,6 @@ jobs:
       # Run Auto-formatter against code base #
       ################################
       - name: Auto-Formatter
-        uses: mezgoodle/auto-formatter@v1.0.2
+        uses: mezgoodle/auto-formatter@v1.0.10
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
