@@ -14,6 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.hitbox = self.rect.inflate(0, -26)
         self.hp = 100
         self.max_hp = 100
+        self.name = "Arthur"
         self.grass_sprites = grass_sprites
         self.direction = pygame.math.Vector2()
         self.speed = 7
@@ -100,7 +101,7 @@ class Player(pygame.sprite.Sprite):
                         self.hitbox.top = sprite.hitbox.bottom
 
     def random_encounter(self):
-        is_colliding = pygame.sprite.spritecollideany(self, self.grass_sprites)
+        is_colliding = pygame.sprite.spritecollideany(self, self.npc_sprites)
         is_moving = self.direction.magnitude() != 0
 
         if is_colliding and is_moving:
@@ -126,12 +127,12 @@ class Player(pygame.sprite.Sprite):
 
     def battle(self):
         print("battle")
-        enemy = Enemy(100)
+        enemy = Enemy(100, "Bamboo")
         cutscene = BattleCutscene(
             self,
             "images/danites2.png",
             "graphics/monsters/bamboo/attack/0.png",
-            enemy.hp,
+            enemy,
         )
         cutscene.play()
         print(cutscene.winner)

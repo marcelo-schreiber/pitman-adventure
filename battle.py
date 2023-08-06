@@ -4,7 +4,7 @@ from cutscene import Cutscene
 import pygame
 import time
 from settings import moves, FPS, WIDTH
-
+from textbox import Textbox
 
 class BattleCutscene(Cutscene):
     def __init__(
@@ -12,33 +12,29 @@ class BattleCutscene(Cutscene):
         player: pygame.sprite.Sprite,
         player_img: str,
         enemy_img: str,
-        enemy_hp: int,
+        enemy: pygame.sprite.Sprite,
     ) -> None:
         super().__init__()
         self.player_sprite = player
 
-        self.player = self.create_actor(player_img, 350, 500, 100, 100, player.hp)
-        self.enemy = self.create_actor(enemy_img, 820, 285, 100, 100, enemy_hp)
+        self.player = self.create_actor(player_img, 350, 500, 100, 100, player.hp, player.name)
+        self.enemy = self.create_actor(enemy_img, 820, 285, 100, 100, enemy.hp, enemy.name)
+
         self.turn = 0
         self.moves = moves
 
+        self.moves_text_initial()
+        
+        self.winner = None
+        self.text_box = Textbox()
+        self.action_text = ""
+
+    def moves_text_initial(self):
         self.create_text("Choose your move:", 1000, 450, "white")
         self.create_text("1. Weak", 1000, 500, "white")
         self.create_text("2. Medium", 1000, 550, "white")
         self.create_text("3. Strong", 1000, 600, "white")
         self.create_text("4. Heal", 1000, 650, "white")
-        self.action_text: str = ""
-        self.timer = 1 * FPS
-
-        self.displaying_specific_text = False
-        self.specific_text = ""
-        self.winner = None
-
-        self.background_text = self.create_actor(
-            "images/background-text.png", -1, -1, WIDTH, 180
-        )
-
-        self.curr_actor_talking = None
 
     @staticmethod
     def get_player_input():
@@ -55,37 +51,45 @@ class BattleCutscene(Cutscene):
         else:
             return None
 
-    def player_attack(self, move=None):
+    def attack(self, move: str, attacker: pygame.sprite.Sprite, defender: pygame.sprite.Sprite):
         if move is None:
-            return
+            move = self.enemy.attack()
+       
+        # random float between 0 and 1
+        accuracy = random()
 
-        chance = random()
-        is_heal = self.moves[move]["damage"] < 0
+        move = self.moves[move]
 
-        if chance < self.moves[move]["accuracy"]:
+        is_heal = move["damage"] < 0
+
+        if accuracy < move["accuracy"]:
+            # hit
             if is_heal:
-                self.player.hp -= self.moves[move]["damage"]
-                self.update_action_text(
-                    f'You used {self.moves[move]["name"]} for {-self.moves[move]["damage"]} hp!'
-                )
+                # heal
+                attacker.hp -= move["damage"]
+                self.action_text = f'{attacker.name} used {move["name"]} healing for {-move["damage"]} health!'
             else:
-                self.enemy.hp -= self.moves[move]["damage"]
-                self.update_action_text(
-                    f'You used {self.moves[move]["name"]} for {self.moves[move]["damage"]} damage!'
-                )
+                defender.hp -= move["damage"]
+                self.action_text = f'{attacker.name} used {move["name"]} for {move["damage"]} damage!'
         else:
-            self.update_action_text(f'Your attack {self.moves[move]["name"]} missed!')
+            # miss
+            self.action_text = f'{attacker.name} attack {move["name"]} missed!'
 
-        self.next_turn()
-
+        self.next_turn() 
+        
     def update(self):
         move = self.get_player_input()
 
         if self.turn % 2 == 0:
-            self.player_attack(move)
+            if move is None:
+                return
+                
+            self.attack(move, self.player, self.enemy)
         else:
-            time.sleep(1.5)
-            self.enemy_attack()
+            if self.text_box.active:
+                return
+                
+            self.attack(None, self.enemy, self.player)
 
         if self.player.hp <= 0:
             self.is_running = False
@@ -97,51 +101,16 @@ class BattleCutscene(Cutscene):
             self.winner = "player"
             print("You win!")
 
-    def update_action_text(self, text: str):
-        # remove old text
-        self.texts = [text for text in self.texts if text.text != self.action_text]
-        self.action_text = text
-        self.draw_action_text()
-
-    def draw_action_text(self):
-        action_text_x = self.background_text.rect.x + 200
-        action_text_y = (
-            self.background_text.rect.y + self.background_text.rect.height // 2
-        )
-        # draw white rectangle around text
-
-        # draw image
-
-        if "Enemy" in self.action_text:
-            self.remove_curr_actor_talking()
-
-            self.curr_actor_talking = self.create_actor(
-                "images/leo.png", 15, 15, 150, 150
-            )
-            self.display_specific_text_slowly(
-                self.action_text, action_text_x, action_text_y, "red", 20
-            )
-        else:
-            self.remove_curr_actor_talking()
-
-            self.curr_actor_talking = self.create_actor(
-                "images/danites1.png", 15, 15, 150, 150
-            )
-            self.display_specific_text_slowly(
-                self.action_text, action_text_x, action_text_y, "black", 20
-            )
-
-    def remove_curr_actor_talking(self):
-        for actor in self.actors:
-            if actor == self.curr_actor_talking:
-                self.actors.remove(actor)
-
     def draw(self):
         for i in self.actors:
             if i.type == "image_file":
                 self.screen.blit(i.image, i.rect)
             else:
                 pygame.draw.rect(self.screen, i.image, i.rect)
+
+        if self.text_box.active:
+            self.text_box.draw()
+            self.text_box.update()
 
         self.draw_hp_hud()  # Add this line to draw the HP bars
 
@@ -191,32 +160,10 @@ class BattleCutscene(Cutscene):
             pygame.Rect(x - 40, y - 40, bar_width * 2, 20),
         )
 
-    def enemy_attack(self):
-        move = self.enemy.attack()  # returns a random move from the moves dict
-
-        # random float between 0 and 1
-        chance = random()
-
-        if chance < move["accuracy"]:
-            # hit
-            if move["damage"] < 0:
-                # heal
-                self.enemy.hp -= move["damage"]
-                self.update_action_text(
-                    f'Enemy used {move["name"]} healing for {-move["damage"]} health!'
-                )
-            else:
-                self.player.hp -= move["damage"]
-                self.update_action_text(
-                    f'Enemy used {move["name"]} for {move["damage"]} damage!'
-                )
-        else:
-            # miss
-            self.update_action_text(f'Enemy attack {move["name"]} missed!')
-
-        self.next_turn()
-
     def next_turn(self):
         print(f"Player HP: {self.player.hp}")
         print(f"Enemy HP: {self.enemy.hp}")
+            
         self.turn += 1  # why a function for this? IDK but it's here now
+        self.text_box.start_text(messages=[self.action_text])
+        self.text_box.char_idx = 0
