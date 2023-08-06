@@ -12,7 +12,6 @@ from messages import *
 
 class Level:
     def __init__(self):
-
         # get the display surface
         self.display_surface = pygame.display.get_surface()
 
@@ -27,7 +26,7 @@ class Level:
 
         self.player = None
         self.initialize_player()
-        
+
         self.s1 = Textbox()
         self.s1.start_text(intro)
 
@@ -37,9 +36,14 @@ class Level:
         player_initial_x = TILESIZE * 11
         player_initial_y = TILESIZE * 11
 
-        self.player = Player((player_initial_x, player_initial_y),
-                             [self.visible_sprites], self.obstacle_sprites, self.grass_sprites, self.npc_sprites)
-    
+        self.player = Player(
+            (player_initial_x, player_initial_y),
+            [self.visible_sprites],
+            self.obstacle_sprites,
+            self.grass_sprites,
+            self.npc_sprites,
+        )
+
     def create_npc(self):
         groups = [self.visible_sprites, self.npc_sprites]
         Npc(groups, (9, 10), 'spirit', villager_1)
@@ -55,27 +59,27 @@ class Level:
 
     def create_map(self):
         layouts = {  # list of layouts (collision, visuals, etc)
-            'boundary': import_csv_layout('map/map_Collision.csv'),
-            'grass': import_csv_layout('map/map_Grass.csv'),
-            'object': import_csv_layout('map/map_LargeObjects.csv'),
-            'details': import_csv_layout('map/map_Details.csv')
+            "boundary": import_csv_layout("map/map_FloorBlocks.csv"),
+            "grass": import_csv_layout("map/map_Grass.csv"),
+            "object": import_csv_layout("map/map_LargeObjects.csv"),
+            "details": import_csv_layout("map/map_Details.csv"),
         }
 
         graphics = {  # list of images
-            'grass': import_folder('graphics/grass'),
+            "grass": import_folder("graphics/grass"),
         }
 
         for style, layout in layouts.items():
             for row_idx, row in enumerate(layout):
                 for col_idx, cell in enumerate(row):
-                    if cell == '-1':
+                    if cell == "-1":
                         continue
 
                     x = col_idx * TILESIZE
                     y = row_idx * TILESIZE
 
-                    if style == 'boundary':
-                        Tile((x, y), [self.obstacle_sprites], 'boundary')
+                    if style == "boundary":
+                        Tile((x, y), [self.obstacle_sprites], "boundary")
                     # if style == 'object':
                     #     Tile((x, y), [self.obstacle_sprites], 'object')
 
@@ -106,12 +110,14 @@ class YSortCameraGroup(pygame.sprite.Group):
         self.half_height = self.display_surface.get_size()[1] // 2
         self.offset = pygame.math.Vector2()
 
-        layout = import_csv_layout('map/map_FloorBlocks.csv')
+        layout = import_csv_layout("map/map_FloorBlocks.csv")
         # create floor
-        self.floor_surface = pygame.image.load('tilemap/pitman-map.png').convert()
+        self.floor_surface = pygame.image.load("tilemap/ground.png").convert()
+
         # scale to layout size * TILE_SIZE
-        self.floor_surface = pygame.transform.scale(self.floor_surface,
-                                                    (len(layout[0]) * TILESIZE, len(layout) * TILESIZE))
+        self.floor_surface = pygame.transform.scale(
+            self.floor_surface, (len(layout[0]) * TILESIZE, len(layout) * TILESIZE)
+        )
 
         self.floor_rect = self.floor_surface.get_rect(topleft=(0, 0))
 

@@ -1,9 +1,11 @@
 # ARTHUR-GAME
 
 ## Project description
+
 A Pokemon clone made with python and pygame
 
 ## Todo list
+
 - [x] Create a map
 - [x] Create a player
 - [x] Create a camera
@@ -11,7 +13,7 @@ A Pokemon clone made with python and pygame
 - [x] Create a random encounter system
 - [x] Create a battle system
 - [ ] Add sprites
-- [ ] Animation system 
+- [ ] Animation system
 - [ ] Create a player upgrade system
 - [ ] Create a menu
 - [ ] Create a save system
@@ -25,3 +27,5 @@ A Pokemon clone made with python and pygame
 - [ ] Add pause
 - [ ] Add cutscenes
 - [ ] Credits
+
+![Auto formate code](https://github.com/marcelo-schreiber/pitman-adventure/workflows/Auto%20formate%20code/badge.svg)

@@ -2,8 +2,8 @@ import pygame
 from textbox import *
 from settings import TILESIZE
 
-class Npc(pygame.sprite.Sprite):
 
+class Npc(pygame.sprite.Sprite):
     def __init__(self, groups, pos, name, messages):
         super().__init__(groups)
         self.image = pygame.image.load('graphics/npcs/' + name + '.png').convert_alpha()

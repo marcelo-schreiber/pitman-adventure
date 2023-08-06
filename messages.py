@@ -3,7 +3,7 @@ intro = [
     "Arthur woke up excited to visit Fenoxer.",
     "However, after quick inspection...",
     "He noticed his Eevee was GONE!!!",
-    "Scared, Arthur went looking for her."
+    "Scared, Arthur went looking for her.",
 ]
 
 villager_1 = [

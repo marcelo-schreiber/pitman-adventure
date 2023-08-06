@@ -17,8 +17,17 @@ class Cutscene:
         self.font = pygame.font.Font("font/PressStart2P-Regular.ttf", 22)
 
     class Actor(Enemy):
-        def __init__(self, name: str, x: int, y: int, width: int, height: int, enemy_hp=100):
-            super().__init__(enemy_hp)
+        def __init__(
+            self,
+            name: str,
+            x: int,
+            y: int,
+            width: int,
+            height: int,
+            enemy_hp: int,
+            character_name: str,
+        ):
+            super().__init__(enemy_hp, character_name)
             try:
                 self.image = pygame.image.load(name).convert_alpha()
                 self.image = pygame.transform.scale(self.image, (width, height))
@@ -38,12 +47,23 @@ class Cutscene:
             self.y = y
             self.color = color
 
-    def create_actor(self, name: str, x: int, y: int, width: int, height: int, enemy_hp=100):
-        actor = self.Actor(name, x, y, width, height, enemy_hp)
+    def create_actor(
+        self,
+        name: str,
+        x: int,
+        y: int,
+        width: int,
+        height: int,
+        enemy_hp=100,
+        character_name: str = "enemy",
+    ):
+        actor = self.Actor(name, x, y, width, height, enemy_hp, character_name)
         self.actors.append(actor)
         return actor
 
-    def display_specific_text_slowly(self, text: str, x: int, y: int, color: str, speed=50):
+    def display_specific_text_slowly(
+        self, text: str, x: int, y: int, color: str, speed=50
+    ):
         text_obj = self.create_text("", x, y, color)
         self.specific_text = text
         self.displaying_specific_text = True
@@ -52,7 +72,7 @@ class Cutscene:
             text_obj.text += char
             text_obj.x += self.get_text_size(char)[0] // 2
             self.screen.fill("black")
-            self.background('images/background_battle_image.jpg')
+            self.background("images/background_battle_image.jpg")
             self.draw()
             self.write_texts()
             self.update_screen()
@@ -120,20 +140,16 @@ class Cutscene:
                     pygame.quit()
                     quit()
                 if event.type == pygame.KEYDOWN:
-                    if (
-                            event.key == pygame.K_ESCAPE
-                            or event.key == pygame.K_SPACE
-                            or event.key == pygame.K_RETURN
-                    ):
+                    if event.key == pygame.K_ESCAPE or event.key == pygame.K_RETURN:
                         self.is_running = False
 
             self.screen.fill("black")
-            self.background('images/background_battle_image.jpg')
+            self.background("images/background_battle_image.jpg")
             self.draw()
             self.write_texts()
             self.update_screen()
 
     def update(self):
-        raise NotImplementedError("You need to implement this method in your cutscene class")
-
-
+        raise NotImplementedError(
+            "You need to implement this method in your cutscene class"
+        )
