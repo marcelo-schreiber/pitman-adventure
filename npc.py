@@ -10,7 +10,7 @@ class Npc(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (TILESIZE, TILESIZE))
         self.rect = self.image.get_rect()
         pos = (pos[0] * TILESIZE, pos[1] * TILESIZE)
-        self.rect.topleft = pos
+        self.rect.top_left = pos
 
         self.messages = messages
 
@@ -21,6 +21,7 @@ class Npc(pygame.sprite.Sprite):
 
     def update(self):
         pass
+
 
 class GymTrainer(Npc):
 

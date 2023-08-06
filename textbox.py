@@ -32,7 +32,7 @@ class Textbox(metaclass=TSingletonMeta):
         self.display_surface = pygame.display.get_surface()
         self.font = pygame.font.Font("font/PressStart2P-Regular.ttf", 22)
         self.text_background = pygame.image.load("images/background-text.png").convert_alpha()
-        self.text_background = pygame.transform.scale(self.text_background, (WIDTH, HEIGHT/5))
+        self.text_background = pygame.transform.scale(self.text_background, (WIDTH, HEIGHT / 5))
 
         self.iterator = 0
         self.messages = []
@@ -44,6 +44,8 @@ class Textbox(metaclass=TSingletonMeta):
 
         self.character_speed = 0.5
         self.char_idx: float = 0
+
+        self.handle_talking_end = lambda: None  # function that returns nothing
 
     def input(self):
         keys = pygame.key.get_pressed()
@@ -58,8 +60,8 @@ class Textbox(metaclass=TSingletonMeta):
             self.iterator += 1
             if self.iterator == len(self.messages):
                 self.active = False
-                if self.func != None:
-                    self.func()
+                if self.handle_talking_end is not None:
+                    self.handle_talking_end()
             else:
                 self.current_text = self.messages[self.iterator]
                 self.char_idx = 0
@@ -67,17 +69,17 @@ class Textbox(metaclass=TSingletonMeta):
         else:
             self.pressed = False
 
-    def start_text(self, messages: [str], func=None):
+    def start_text(self, messages: [str], func=lambda: None):
         self.active = True
         self.iterator = 0
         self.messages = messages
-        self.func = func
+        self.handle_talking_end = func
 
         self.current_text = self.messages[self.iterator]
         self.char_idx = 0
 
     def after_fire(self):
-        func()
+        self.handle_talking_end()
 
     def draw(self):
         if not self.active:
@@ -85,7 +87,7 @@ class Textbox(metaclass=TSingletonMeta):
 
         text_to_draw = self.current_text[:int(self.char_idx)]
         text_surface = self.font.render(text_to_draw, True, "Black")
-        self.display_surface.blit(self.text_background, (0,0))
+        self.display_surface.blit(self.text_background, (0, 0))
         self.display_surface.blit(text_surface, (100, 55))
 
         # update character index
