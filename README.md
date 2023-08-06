@@ -28,4 +28,4 @@ A Pokemon clone made with python and pygame
 - [ ] Add cutscenes
 - [ ] Credits
 
-![Auto formate code](https://github.com/<OWNER>/<REPOSITORY>/workflows/Auto%20formate%20code/badge.svg)
+![Auto formate code](https://github.com/marcelo-schreiber/pitman-adventure/workflows/Auto%20formate%20code/badge.svg)
