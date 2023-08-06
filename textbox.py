@@ -12,11 +12,11 @@ import pygame
 example_message = [
     "Hello!",
     "This is an example text message.",
-    "This Singleton helps making textboxes!" 
+    "This Singleton helps making textboxes!"
 ]
 
-class TSingletonMeta(type):
 
+class TSingletonMeta(type):
     _instances = {}
 
     def __call__(cls, *args, **kwargs):
@@ -24,6 +24,7 @@ class TSingletonMeta(type):
             instance = super().__call__(*args, **kwargs)
             cls._instances[cls] = instance
         return cls._instances[cls]
+
 
 class Textbox(metaclass=TSingletonMeta):
 
@@ -39,6 +40,9 @@ class Textbox(metaclass=TSingletonMeta):
 
         self.pressed = False
 
+        self.character_speed = 0.5
+        self.char_idx: float = 0
+
     def input(self):
         keys = pygame.key.get_pressed()
 
@@ -50,11 +54,12 @@ class Textbox(metaclass=TSingletonMeta):
                 self.active = False
             else:
                 self.current_text = self.messages[self.iterator]
+                self.char_idx = 0
             self.pressed = True
         else:
             self.pressed = False
 
-    def start_text(self, messages : [str]):
+    def start_text(self, messages: [str]):
         self.active = True
         self.iterator = 0
         self.messages = messages
@@ -62,8 +67,17 @@ class Textbox(metaclass=TSingletonMeta):
         self.current_text = self.messages[self.iterator]
 
     def draw(self):
-        text_surface = self.font.render(self.current_text, True, "White")
+        if not self.active:
+            return
+
+        text_to_draw = self.current_text[:int(self.char_idx)]
+        text_surface = self.font.render(text_to_draw, True, "White")
         self.display_surface.blit(text_surface, (10, 10))
 
+        # update character index
+        self.char_idx = min(self.char_idx + self.character_speed, len(self.current_text))
+
     def update(self):
-        self.input()
+        if self.active:
+            self.draw()
+            self.input()
