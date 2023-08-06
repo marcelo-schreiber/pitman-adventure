@@ -1,0 +1,30 @@
+name: auto-format
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+jobs:
+  format:
+    # Check if the PR is not from a fork
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          ref: ${{ github.head_ref }}
+      - name: black
+        uses: lgeiger/black-action@v1.0.1
+        with:
+          args: .
+      - name: Check for modified files
+        id: git-check
+        run: echo "modified=$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)" >> $GITHUB_OUTPUT
+      - name: Push changes
+        if: steps.git-check.outputs.modified == 'true'
+        run: |
+          git config --global user.name 'marcelo-schrieber'
+          git config --global user.email 'marceloschreiber@ufpr.br'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git commit -am "Formatting code with black automatically"
+          git push

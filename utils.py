@@ -5,7 +5,7 @@ import pygame
 
 def import_csv_layout(path):
     with open(path) as level_map:
-        level_map = reader(level_map, delimiter=',')
+        level_map = reader(level_map, delimiter=",")
         layout = []
         for row in level_map:
             layout.append(row)
@@ -15,7 +15,9 @@ def import_csv_layout(path):
 
 def import_folder(path):
     surface_list = []
-    for _, __, img_files in walk(path):  # returns current_folder, sub_folders and all the files inside a folder
+    for _, __, img_files in walk(
+        path
+    ):  # returns current_folder, sub_folders and all the files inside a folder
         for image in img_files:
             full_path = f"{path}/{image}"
             image_surf = pygame.image.load(full_path).convert_alpha()
