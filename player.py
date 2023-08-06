@@ -94,8 +94,6 @@ class Player(pygame.sprite.Sprite):
     def npc_interaction(self):
         npcs_collided = pygame.sprite.spritecollide(self, self.npc_sprites, False)
 
-        print(npcs_collided)
-
         if npcs_collided:
             if self.can_interact:
                 for npc in npcs_collided:
