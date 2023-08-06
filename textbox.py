@@ -1,7 +1,7 @@
 # Introdução:
 # A classe textbox é um Singleton, ou seja, qualquer instância do objeto será
 # uma referência a um mesmo objeto.
-# 
+#
 # Como Usar:
 # Instancie a classe Textbox e chame start_text com uma lista de strings.
 # Isso irá pausar o jogo e começar a mostrar o texto.
@@ -12,7 +12,7 @@ import pygame
 example_message = [
     "Hello!",
     "This is an example text message.",
-    "This Singleton helps making textboxes!"
+    "This Singleton helps making textboxes!",
 ]
 
 
@@ -27,7 +27,6 @@ class TSingletonMeta(type):
 
 
 class Textbox(metaclass=TSingletonMeta):
-
     def __init__(self):
         self.display_surface = pygame.display.get_surface()
         self.font = pygame.font.Font("font/PressStart2P-Regular.ttf", 22)
@@ -70,12 +69,14 @@ class Textbox(metaclass=TSingletonMeta):
         if not self.active:
             return
 
-        text_to_draw = self.current_text[:int(self.char_idx)]
+        text_to_draw = self.current_text[: int(self.char_idx)]
         text_surface = self.font.render(text_to_draw, True, "White")
         self.display_surface.blit(text_surface, (10, 10))
 
         # update character index
-        self.char_idx = min(self.char_idx + self.character_speed, len(self.current_text))
+        self.char_idx = min(
+            self.char_idx + self.character_speed, len(self.current_text)
+        )
 
     def update(self):
         if self.active:
