@@ -6,6 +6,7 @@ import time
 from settings import moves, FPS, WIDTH
 from textbox import Textbox
 
+
 class BattleCutscene(Cutscene):
     def __init__(
         self,
@@ -17,14 +18,18 @@ class BattleCutscene(Cutscene):
         super().__init__()
         self.player_sprite = player
 
-        self.player = self.create_actor(player_img, 350, 500, 100, 100, player.hp, player.name)
-        self.enemy = self.create_actor(enemy_img, 820, 285, 100, 100, enemy.hp, enemy.name)
+        self.player = self.create_actor(
+            player_img, 350, 500, 100, 100, player.hp, player.name
+        )
+        self.enemy = self.create_actor(
+            enemy_img, 820, 285, 100, 100, enemy.hp, enemy.name
+        )
 
         self.turn = 0
         self.moves = moves
 
         self.moves_text_initial()
-        
+
         self.winner = None
         self.text_box = Textbox()
         self.action_text = ""
@@ -51,10 +56,12 @@ class BattleCutscene(Cutscene):
         else:
             return None
 
-    def attack(self, move: str, attacker: pygame.sprite.Sprite, defender: pygame.sprite.Sprite):
+    def attack(
+        self, move: str, attacker: pygame.sprite.Sprite, defender: pygame.sprite.Sprite
+    ):
         if move is None:
             move = self.enemy.attack()
-       
+
         # random float between 0 and 1
         accuracy = random()
 
@@ -70,25 +77,27 @@ class BattleCutscene(Cutscene):
                 self.action_text = f'{attacker.name} used {move["name"]} healing for {-move["damage"]} health!'
             else:
                 defender.hp -= move["damage"]
-                self.action_text = f'{attacker.name} used {move["name"]} for {move["damage"]} damage!'
+                self.action_text = (
+                    f'{attacker.name} used {move["name"]} for {move["damage"]} damage!'
+                )
         else:
             # miss
             self.action_text = f'{attacker.name} attack {move["name"]} missed!'
 
-        self.next_turn() 
-        
+        self.next_turn()
+
     def update(self):
         move = self.get_player_input()
 
         if self.turn % 2 == 0:
             if move is None:
                 return
-                
+
             self.attack(move, self.player, self.enemy)
         else:
             if self.text_box.active:
                 return
-                
+
             self.attack(None, self.enemy, self.player)
 
         if self.player.hp <= 0:
@@ -163,7 +172,7 @@ class BattleCutscene(Cutscene):
     def next_turn(self):
         print(f"Player HP: {self.player.hp}")
         print(f"Enemy HP: {self.enemy.hp}")
-            
+
         self.turn += 1  # why a function for this? IDK but it's here now
         self.text_box.start_text(messages=[self.action_text])
         self.text_box.char_idx = 0

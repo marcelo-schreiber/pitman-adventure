@@ -18,7 +18,14 @@ class Cutscene:
 
     class Actor(Enemy):
         def __init__(
-            self, name: str, x: int, y: int, width: int, height: int, enemy_hp: int, character_name: str
+            self,
+            name: str,
+            x: int,
+            y: int,
+            width: int,
+            height: int,
+            enemy_hp: int,
+            character_name: str,
         ):
             super().__init__(enemy_hp, character_name)
             try:
@@ -41,7 +48,14 @@ class Cutscene:
             self.color = color
 
     def create_actor(
-        self, name: str, x: int, y: int, width: int, height: int, enemy_hp=100, character_name: str = "enemy"
+        self,
+        name: str,
+        x: int,
+        y: int,
+        width: int,
+        height: int,
+        enemy_hp=100,
+        character_name: str = "enemy",
     ):
         actor = self.Actor(name, x, y, width, height, enemy_hp, character_name)
         self.actors.append(actor)
@@ -126,10 +140,7 @@ class Cutscene:
                     pygame.quit()
                     quit()
                 if event.type == pygame.KEYDOWN:
-                    if (
-                        event.key == pygame.K_ESCAPE
-                        or event.key == pygame.K_RETURN
-                    ):
+                    if event.key == pygame.K_ESCAPE or event.key == pygame.K_RETURN:
                         self.is_running = False
 
             self.screen.fill("black")
