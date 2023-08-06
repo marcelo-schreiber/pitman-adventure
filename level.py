@@ -46,7 +46,7 @@ class Level:
 
     def create_map(self):
         layouts = {  # list of layouts (collision, visuals, etc)
-            'boundary': import_csv_layout('map/map_FloorBlocks.csv'),
+            'boundary': import_csv_layout('map/map_Collision.csv'),
             'grass': import_csv_layout('map/map_Grass.csv'),
             'object': import_csv_layout('map/map_LargeObjects.csv'),
             'details': import_csv_layout('map/map_Details.csv')
@@ -99,7 +99,7 @@ class YSortCameraGroup(pygame.sprite.Group):
 
         layout = import_csv_layout('map/map_FloorBlocks.csv')
         # create floor
-        self.floor_surface = pygame.image.load('tilemap/ground.png').convert()
+        self.floor_surface = pygame.image.load('tilemap/pitman-map.png').convert()
         # scale to layout size * TILE_SIZE
         self.floor_surface = pygame.transform.scale(self.floor_surface,
                                                     (len(layout[0]) * TILESIZE, len(layout) * TILESIZE))
