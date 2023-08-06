@@ -40,8 +40,21 @@ sign_d = [
 ]
 
 leo = [
-    "Arthur: Hey Leo! Have you seen eevee?",
-    "Leo: HAHAHHAHA!",
+    "Arthur: Hey Leo! Have you seen Eevee?",
+    "Leo: BROUHAHA!",
     "Arthur: What?",
-    "Leo: YOU'LL NEVER FIND HER!"
+    "Leo: I’ll never let you find her!",
+    "Arthur: You won’t stay in my path! I must find Evee!",
+    "Leo: Don’t underestimate me, Fixller!",
+    "Leo: For I am the High Priest of the Dinosaurs!",
+    "Leo: And warrior of peace!",
+    "Leo: …",
+    "Arthur: …",
+    "Leo: I SAID!",
+    "Leo: WARRIOR!",
+    "Leo: OF!",
+    "Leo: PEACE!",
+    "Dinossauro: ROOOOOAAAR!",
+    "Leo: HAH! There he is!",
+    "Now eat this motherfuckaaaaaa!",
 ]
