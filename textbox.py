@@ -58,6 +58,8 @@ class Textbox(metaclass=TSingletonMeta):
             self.iterator += 1
             if self.iterator == len(self.messages):
                 self.active = False
+                if self.func != None:
+                    self.func()
             else:
                 self.current_text = self.messages[self.iterator]
                 self.char_idx = 0
@@ -65,13 +67,17 @@ class Textbox(metaclass=TSingletonMeta):
         else:
             self.pressed = False
 
-    def start_text(self, messages: [str]):
+    def start_text(self, messages: [str], func=None):
         self.active = True
         self.iterator = 0
         self.messages = messages
+        self.func = func
 
         self.current_text = self.messages[self.iterator]
         self.char_idx = 0
+
+    def after_fire(self):
+        func()
 
     def draw(self):
         if not self.active:

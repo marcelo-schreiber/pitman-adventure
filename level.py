@@ -47,8 +47,8 @@ class Level:
     def create_npc(self):
         groups = [self.visible_sprites, self.npc_sprites]
         Npc(groups, (9, 10), 'spirit', villager_1)
-        Npc(groups, (7, 15), 'spirit', villager_2)
-        Npc(groups, (15, 11), 'spirit', villager_3)
+        Npc(groups, (7, 15), 'binder', villager_2)
+        Npc(groups, (15, 11), 'fenoxer', villager_3)
         Npc(self.npc_sprites, (18, 26), 'spirit', sign_a)
         Npc(self.npc_sprites, (29, 17), 'spirit', sign_b)
         Npc(self.npc_sprites, (29, 32), 'spirit', sign_c)
@@ -59,7 +59,7 @@ class Level:
 
     def create_map(self):
         layouts = {  # list of layouts (collision, visuals, etc)
-            "boundary": import_csv_layout("map/map_FloorBlocks.csv"),
+            "boundary": import_csv_layout("map/map_Collision.csv"),
             "grass": import_csv_layout("map/map_Grass.csv"),
             "object": import_csv_layout("map/map_LargeObjects.csv"),
             "details": import_csv_layout("map/map_Details.csv"),
@@ -110,9 +110,9 @@ class YSortCameraGroup(pygame.sprite.Group):
         self.half_height = self.display_surface.get_size()[1] // 2
         self.offset = pygame.math.Vector2()
 
-        layout = import_csv_layout("map/map_FloorBlocks.csv")
+        layout = import_csv_layout("map/map_Collision.csv")
         # create floor
-        self.floor_surface = pygame.image.load("tilemap/ground.png").convert()
+        self.floor_surface = pygame.image.load("tilemap/pitman-map.png").convert()
 
         # scale to layout size * TILE_SIZE
         self.floor_surface = pygame.transform.scale(

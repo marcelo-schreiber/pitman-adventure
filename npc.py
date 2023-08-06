@@ -34,18 +34,4 @@ class GymTrainer(Npc):
         self.defeated = False
 
     def begin_interaction(self):
-        if not self.defeated:
-            self.textbox.start_text(messages=self.messages)
-            self.start_fight = True
-
-    def update(self):
-        if self.defeated:
-            return
-
-        if not self.textbox.active and self.start_fight:
-            self.conv_end = True
-
-        if self.conv_end:
-            self.player.battle()
-            self.conv_end = False
-            self.defeated = True
+        self.textbox.start_text(messages=self.messages, func=self.player.battle)
