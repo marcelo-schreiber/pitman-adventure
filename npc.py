@@ -8,9 +8,8 @@ class Npc(pygame.sprite.Sprite):
         super().__init__(groups)
         self.image = pygame.image.load('graphics/npcs/' + name + '.png').convert_alpha()
         self.image = pygame.transform.scale(self.image, (TILESIZE, TILESIZE))
-        self.rect = self.image.get_rect()
         pos = (pos[0] * TILESIZE, pos[1] * TILESIZE)
-        self.rect.top_left = pos
+        self.rect = self.image.get_rect(topleft=pos)
 
         self.messages = messages
 

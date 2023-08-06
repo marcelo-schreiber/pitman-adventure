@@ -2,8 +2,7 @@ from random import random
 
 from cutscene import Cutscene
 import pygame
-import time
-from settings import moves, FPS, WIDTH
+from settings import moves
 from textbox import Textbox
 
 
@@ -57,9 +56,9 @@ class BattleCutscene(Cutscene):
             return None
 
     def attack(
-        self, move: str, attacker: pygame.sprite.Sprite, defender: pygame.sprite.Sprite
+        self, move: str | None, attacker: pygame.sprite.Sprite, defender: pygame.sprite.Sprite
     ):
-        if move is None:
+        if move is None and attacker is self.enemy:
             move = self.enemy.attack()
 
         # random float between 0 and 1
