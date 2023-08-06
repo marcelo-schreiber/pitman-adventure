@@ -104,6 +104,7 @@ class YSortCameraGroup(pygame.sprite.Group):
         layout = import_csv_layout("map/map_FloorBlocks.csv")
         # create floor
         self.floor_surface = pygame.image.load("tilemap/ground.png").convert()
+
         # scale to layout size * TILE_SIZE
         self.floor_surface = pygame.transform.scale(
             self.floor_surface, (len(layout[0]) * TILESIZE, len(layout) * TILESIZE)

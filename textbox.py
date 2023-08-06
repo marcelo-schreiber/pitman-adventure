@@ -48,6 +48,10 @@ class Textbox(metaclass=TSingletonMeta):
         if keys[pygame.K_SPACE]:
             if self.pressed:
                 return
+            if self.char_idx < len(self.current_text) - 1:
+                self.char_idx = len(self.current_text) - 1
+                self.pressed = True
+                return
             self.iterator += 1
             if self.iterator == len(self.messages):
                 self.active = False
