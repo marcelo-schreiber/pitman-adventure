@@ -58,7 +58,7 @@ class BattleCutscene(Cutscene):
     @staticmethod
     def attack(
             move: str | None, attacker: pygame.sprite.Sprite, defender: pygame.sprite.Sprite
-    ):
+    ) -> str:
         if move is None:
             move = attacker.attack()
 
@@ -83,11 +83,20 @@ class BattleCutscene(Cutscene):
             # miss
             return f'{attacker.name} attack {move["name"]} missed!'
 
-    def update(self):
-        move = self.get_player_input()
+    @staticmethod
+    def hp_color_from_ratio(ratio: float):
+        if ratio > 0.6:
+            return "green"
+        elif ratio > 0.3:
+            return "yellow"
+        else:
+            return "red"
 
-        if self.turn % 2 == 0:
-            if move is None:
+    def make_a_move(self, move: str):
+        is_player_turn = self.turn % 2 == 0
+
+        if is_player_turn:
+            if move is None:  # return early while not moving
                 return
 
             self.action_text = self.attack(move, self.player, self.enemy)
@@ -99,6 +108,11 @@ class BattleCutscene(Cutscene):
 
             self.action_text = self.attack(None, self.enemy, self.player)
             self.next_turn()
+
+    def update(self):
+        move = self.get_player_input()
+
+        self.make_a_move(move)
 
         if self.player.hp <= 0:
             self.is_running = False
@@ -121,15 +135,6 @@ class BattleCutscene(Cutscene):
         self.text_box.update()
 
         self.draw_hp_hud()  # Add this line to draw the HP bars
-
-    @staticmethod
-    def hp_color_from_ratio(ratio: float):
-        if ratio > 0.6:
-            return "green"
-        elif ratio > 0.3:
-            return "yellow"
-        else:
-            return "red"
 
     def draw_hp_hud(self):
         player_hp_ratio = self.player.hp / self.player.max_hp
