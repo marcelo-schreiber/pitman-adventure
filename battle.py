@@ -8,11 +8,11 @@ from textbox import Textbox
 
 class BattleCutscene(Cutscene):
     def __init__(
-        self,
-        player: pygame.sprite.Sprite,
-        player_img: str,
-        enemy_img: str,
-        enemy: pygame.sprite.Sprite,
+            self,
+            player: pygame.sprite.Sprite,
+            player_img: str,
+            enemy_img: str,
+            enemy: pygame.sprite.Sprite,
     ) -> None:
         super().__init__()
         self.player_sprite = player
@@ -55,16 +55,17 @@ class BattleCutscene(Cutscene):
         else:
             return None
 
+    @staticmethod
     def attack(
-        self, move: str | None, attacker: pygame.sprite.Sprite, defender: pygame.sprite.Sprite
+            move: str | None, attacker: pygame.sprite.Sprite, defender: pygame.sprite.Sprite
     ):
-        if move is None and attacker is self.enemy:
-            move = self.enemy.attack()
+        if move is None:
+            move = attacker.attack()
 
         # random float between 0 and 1
         accuracy = random()
 
-        move = self.moves[move]
+        move = moves[move]
 
         is_heal = move["damage"] < 0
 
@@ -73,17 +74,14 @@ class BattleCutscene(Cutscene):
             if is_heal:
                 # heal
                 attacker.hp -= move["damage"]
-                self.action_text = f'{attacker.name} used {move["name"]} healing for {-move["damage"]} health!'
+                return f'{attacker.name} used {move["name"]} healing for {-move["damage"]} health!'
             else:
                 defender.hp -= move["damage"]
-                self.action_text = (
-                    f'{attacker.name} used {move["name"]} for {move["damage"]} damage!'
-                )
+                return f'{attacker.name} used {move["name"]} for {move["damage"]} damage!'
+
         else:
             # miss
-            self.action_text = f'{attacker.name} attack {move["name"]} missed!'
-
-        self.next_turn()
+            return f'{attacker.name} attack {move["name"]} missed!'
 
     def update(self):
         move = self.get_player_input()
@@ -92,12 +90,15 @@ class BattleCutscene(Cutscene):
             if move is None:
                 return
 
-            self.attack(move, self.player, self.enemy)
+            self.action_text = self.attack(move, self.player, self.enemy)
+            self.next_turn()
+
         else:
             if self.text_box.active:
                 return
 
-            self.attack(None, self.enemy, self.player)
+            self.action_text = self.attack(None, self.enemy, self.player)
+            self.next_turn()
 
         if self.player.hp <= 0:
             self.is_running = False
@@ -116,9 +117,8 @@ class BattleCutscene(Cutscene):
             else:
                 pygame.draw.rect(self.screen, i.image, i.rect)
 
-        if self.text_box.active:
-            self.text_box.draw()
-            self.text_box.update()
+        self.text_box.draw()
+        self.text_box.update()
 
         self.draw_hp_hud()  # Add this line to draw the HP bars
 
