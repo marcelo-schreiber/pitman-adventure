@@ -64,7 +64,9 @@ class BattleCutscene(Cutscene):
     ) -> str:
         accuracy = random()
 
-        move = attacker.moves[move] # get the move from the attacker, so in the future we can have different moves for different enemies and players
+        move = attacker.moves[
+            move
+        ]  # get the move from the attacker, so in the future we can have different moves for different enemies and players
 
         is_heal = move["damage"] < 0
 
@@ -107,13 +109,15 @@ class BattleCutscene(Cutscene):
         width=2 * TILESIZE,
         height=2 * TILESIZE,
     ):
-        sprites = import_folder(f"graphics/particles/{move.lower()}") # lowercase the move name, only works on windows
+        sprites = import_folder(
+            f"graphics/particles/{move.lower()}"
+        )  # lowercase the move name, only works on windows
 
         for sprite in sprites:
             sprite = pygame.transform.scale(sprite, (width, height))
 
             self.screen.blit(sprite, (pos[0] - width / 2, pos[1] - height / 2))
-            pygame.display.update() 
+            pygame.display.update()
             pygame.time.delay(delay)
             self.full_update()
 
