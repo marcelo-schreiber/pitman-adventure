@@ -75,13 +75,13 @@ class BattleCutscene(Cutscene):
                 attacker.hp -= move["damage"]
 
                 self.animate_move_and_stop_text(
-                    "heal", (attacker.rect.centerx, attacker.rect.centery), 60
+                    "heal", (attacker.rect.centerx, attacker.rect.centery), 120
                 )
                 return f'{attacker.name} used {move["name"]} healing for {-move["damage"]} health!'
             else:
                 defender.hp -= move["damage"]
                 self.animate_move_and_stop_text(
-                    move["name"], (defender.rect.centerx, defender.rect.centery), 60
+                    move["name"], (defender.rect.centerx, defender.rect.centery), 120
                 )
                 return (
                     f'{attacker.name} used {move["name"]} for {move["damage"]} damage!'
@@ -107,15 +107,14 @@ class BattleCutscene(Cutscene):
         width=2 * TILESIZE,
         height=2 * TILESIZE,
     ):
-        sprites = import_folder(f"graphics/particles/{move}")
+        sprites = import_folder(f"graphics/particles/{move.lower()}") # lowercase the move name, only works on windows
 
         for sprite in sprites:
             sprite = pygame.transform.scale(sprite, (width, height))
 
             self.screen.blit(sprite, (pos[0] - width / 2, pos[1] - height / 2))
-            pygame.display.flip()
+            pygame.display.update(self.screen) 
             pygame.time.delay(delay)
-
             self.full_update()
 
     def make_a_move(self, move: str):
