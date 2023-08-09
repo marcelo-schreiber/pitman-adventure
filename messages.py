@@ -10,34 +10,23 @@ villager_1 = [
     "Hello There, Arthur.",
     "I've heard that your Eevee is gone!",
     "You must be horrified.",
-    "I hope you find it soon..."
+    "I hope you find it soon...",
 ]
 
-villager_2 = [
-    "I've heard the news, Arthur.",
-    "Do you think she got lost?"
-]
+villager_2 = ["I've heard the news, Arthur.", "Do you think she got lost?"]
 
 villager_3 = [
     "I'm so sorry for what happened.",
-    "Maybe she went for walk in Parque Barigui!"
+    "Maybe she went for walk in Parque Barigui!",
 ]
 
-sign_a = [
-    "Mezosoic Kingdom"
-]
+sign_a = ["Mezosoic Kingdom"]
 
-sign_b = [
-    "Parque Barigui. This Way ->"
-]
+sign_b = ["Parque Barigui. This Way ->"]
 
-sign_c = [
-    "BEWARE! COLOMBO AHEAD."
-]
+sign_c = ["BEWARE! COLOMBO AHEAD."]
 
-sign_d = [
-    "Welcome to Pinhais!"
-]
+sign_d = ["Welcome to Pinhais!"]
 
 leo = [
     "Arthur: Hey Leo! Have you seen Eevee?",

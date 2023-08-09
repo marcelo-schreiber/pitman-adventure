@@ -31,8 +31,12 @@ class Textbox(metaclass=TSingletonMeta):
     def __init__(self):
         self.display_surface = pygame.display.get_surface()
         self.font = pygame.font.Font("font/PressStart2P-Regular.ttf", 22)
-        self.text_background = pygame.image.load("images/background-text.png").convert_alpha()
-        self.text_background = pygame.transform.scale(self.text_background, (WIDTH, HEIGHT / 5))
+        self.text_background = pygame.image.load(
+            "images/background-text.png"
+        ).convert_alpha()
+        self.text_background = pygame.transform.scale(
+            self.text_background, (WIDTH, HEIGHT / 5)
+        )
 
         self.iterator = 0
         self.messages = []
@@ -85,7 +89,7 @@ class Textbox(metaclass=TSingletonMeta):
         if not self.active:
             return
 
-        text_to_draw = self.current_text[:int(self.char_idx)]
+        text_to_draw = self.current_text[: int(self.char_idx)]
         text_surface = self.font.render(text_to_draw, True, "Black")
         self.display_surface.blit(self.text_background, (0, 0))
         self.display_surface.blit(text_surface, (100, 55))
@@ -96,7 +100,6 @@ class Textbox(metaclass=TSingletonMeta):
         )
 
     def update(self):
-        print(self.char_idx)
         if self.active:
             self.draw()
             self.input()

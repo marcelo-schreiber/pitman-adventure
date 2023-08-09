@@ -1,8 +1,9 @@
 from random import random
+from utils import import_folder
 
 from cutscene import Cutscene
 import pygame
-from settings import moves
+from settings import moves, TILESIZE
 from textbox import Textbox
 
 
@@ -56,15 +57,16 @@ class BattleCutscene(Cutscene):
             return None
 
     def attack(
-        self, move: str | None, attacker: pygame.sprite.Sprite, defender: pygame.sprite.Sprite
-    ):
-        if move is None and attacker is self.enemy:
-            move = self.enemy.attack()
-
-        # random float between 0 and 1
+        self,
+        move: str | None,
+        attacker: pygame.sprite.Sprite,
+        defender: pygame.sprite.Sprite,
+    ) -> str:
         accuracy = random()
 
-        move = self.moves[move]
+        move = attacker.moves[
+            move
+        ]  # get the move from the attacker, so in the future we can have different moves for different enemies and players
 
         is_heal = move["damage"] < 0
 
@@ -73,31 +75,75 @@ class BattleCutscene(Cutscene):
             if is_heal:
                 # heal
                 attacker.hp -= move["damage"]
-                self.action_text = f'{attacker.name} used {move["name"]} healing for {-move["damage"]} health!'
+
+                self.animate_move_and_stop_text(
+                    "heal", (attacker.rect.centerx, attacker.rect.centery), 50
+                )
+                return f'{attacker.name} used {move["name"]} healing for {-move["damage"]} health!'
             else:
                 defender.hp -= move["damage"]
-                self.action_text = (
+                self.animate_move_and_stop_text(
+                    move["name"], (defender.rect.centerx, defender.rect.centery), 50
+                )
+                return (
                     f'{attacker.name} used {move["name"]} for {move["damage"]} damage!'
                 )
         else:
             # miss
-            self.action_text = f'{attacker.name} attack {move["name"]} missed!'
+            return f'{attacker.name} attack {move["name"]} missed!'
 
-        self.next_turn()
+    @staticmethod
+    def hp_color_from_ratio(ratio: float):
+        if ratio > 0.6:
+            return "green"
+        elif ratio > 0.3:
+            return "yellow"
+        else:
+            return "red"
 
-    def update(self):
-        move = self.get_player_input()
+    def animate_move_and_stop_text(
+        self,
+        move: str,
+        pos: tuple[int, int],
+        delay: int,
+        width=2 * TILESIZE,
+        height=2 * TILESIZE,
+    ):
+        sprites = import_folder(
+            f"graphics/particles/{move.lower()}"
+        )  # lowercase the move name, only works on windows
 
-        if self.turn % 2 == 0:
-            if move is None:
+        for sprite in sprites:
+            sprite = pygame.transform.scale(sprite, (width, height))
+
+            self.screen.blit(sprite, (pos[0] - width / 2, pos[1] - height / 2))
+            pygame.display.update()
+            pygame.time.delay(delay)
+            self.full_update()
+
+    def make_a_move(self, move: str):
+        is_player_turn = self.turn % 2 == 0
+
+        if is_player_turn:
+            if move is None:  # return early while not moving
                 return
 
-            self.attack(move, self.player, self.enemy)
+            self.action_text = self.attack(move, self.player, self.enemy)
+            self.next_turn()
+
         else:
             if self.text_box.active:
                 return
 
-            self.attack(None, self.enemy, self.player)
+            move = self.enemy.attack()
+
+            self.action_text = self.attack(move, self.enemy, self.player)
+            self.next_turn()
+
+    def update(self):
+        move = self.get_player_input()
+
+        self.make_a_move(move)
 
         if self.player.hp <= 0:
             self.is_running = False
@@ -116,20 +162,10 @@ class BattleCutscene(Cutscene):
             else:
                 pygame.draw.rect(self.screen, i.image, i.rect)
 
-        if self.text_box.active:
-            self.text_box.draw()
-            self.text_box.update()
+        self.text_box.draw()
+        self.text_box.update()
 
         self.draw_hp_hud()  # Add this line to draw the HP bars
-
-    @staticmethod
-    def hp_color_from_ratio(ratio: float):
-        if ratio > 0.6:
-            return "green"
-        elif ratio > 0.3:
-            return "yellow"
-        else:
-            return "red"
 
     def draw_hp_hud(self):
         player_hp_ratio = self.player.hp / self.player.max_hp

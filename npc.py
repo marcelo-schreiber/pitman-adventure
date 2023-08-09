@@ -6,7 +6,7 @@ from settings import TILESIZE
 class Npc(pygame.sprite.Sprite):
     def __init__(self, groups, pos, name, messages):
         super().__init__(groups)
-        self.image = pygame.image.load('graphics/npcs/' + name + '.png').convert_alpha()
+        self.image = pygame.image.load("graphics/npcs/" + name + ".png").convert_alpha()
         self.image = pygame.transform.scale(self.image, (TILESIZE, TILESIZE))
         pos = (pos[0] * TILESIZE, pos[1] * TILESIZE)
         self.rect = self.image.get_rect(topleft=pos)
@@ -23,7 +23,6 @@ class Npc(pygame.sprite.Sprite):
 
 
 class GymTrainer(Npc):
-
     def __init__(self, groups, pos, name, messages, player):
         super().__init__(groups, pos, name, messages)
 
