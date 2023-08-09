@@ -96,7 +96,6 @@ class Textbox(metaclass=TSingletonMeta):
         )
 
     def update(self):
-        print(self.char_idx)
         if self.active:
             self.draw()
             self.input()
