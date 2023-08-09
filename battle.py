@@ -9,11 +9,11 @@ from textbox import Textbox
 
 class BattleCutscene(Cutscene):
     def __init__(
-            self,
-            player: pygame.sprite.Sprite,
-            player_img: str,
-            enemy_img: str,
-            enemy: pygame.sprite.Sprite,
+        self,
+        player: pygame.sprite.Sprite,
+        player_img: str,
+        enemy_img: str,
+        enemy: pygame.sprite.Sprite,
     ) -> None:
         super().__init__()
         self.player_sprite = player
@@ -57,7 +57,10 @@ class BattleCutscene(Cutscene):
             return None
 
     def attack(
-            self, move: str | None, attacker: pygame.sprite.Sprite, defender: pygame.sprite.Sprite
+        self,
+        move: str | None,
+        attacker: pygame.sprite.Sprite,
+        defender: pygame.sprite.Sprite,
     ) -> str:
         accuracy = random()
 
@@ -71,12 +74,18 @@ class BattleCutscene(Cutscene):
                 # heal
                 attacker.hp -= move["damage"]
 
-                self.animate_move_and_stop_text("heal", (attacker.rect.centerx, attacker.rect.centery), 60)
+                self.animate_move_and_stop_text(
+                    "heal", (attacker.rect.centerx, attacker.rect.centery), 60
+                )
                 return f'{attacker.name} used {move["name"]} healing for {-move["damage"]} health!'
             else:
                 defender.hp -= move["damage"]
-                self.animate_move_and_stop_text(move["name"], (defender.rect.centerx, defender.rect.centery), 60)
-                return f'{attacker.name} used {move["name"]} for {move["damage"]} damage!'
+                self.animate_move_and_stop_text(
+                    move["name"], (defender.rect.centerx, defender.rect.centery), 60
+                )
+                return (
+                    f'{attacker.name} used {move["name"]} for {move["damage"]} damage!'
+                )
         else:
             # miss
             return f'{attacker.name} attack {move["name"]} missed!'
@@ -90,9 +99,14 @@ class BattleCutscene(Cutscene):
         else:
             return "red"
 
-    def animate_move_and_stop_text(self, move: str, pos: tuple[int, int], delay: int, width=2 * TILESIZE,
-                                   height=2 * TILESIZE):
-
+    def animate_move_and_stop_text(
+        self,
+        move: str,
+        pos: tuple[int, int],
+        delay: int,
+        width=2 * TILESIZE,
+        height=2 * TILESIZE,
+    ):
         sprites = import_folder(f"graphics/particles/{move}")
 
         for sprite in sprites:
