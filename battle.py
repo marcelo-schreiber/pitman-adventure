@@ -64,7 +64,7 @@ class BattleCutscene(Cutscene):
     ) -> str:
         accuracy = random()
 
-        move = moves[move]
+        move = attacker.moves[move] # get the move from the attacker, so in the future we can have different moves for different enemies and players
 
         is_heal = move["damage"] < 0
 
@@ -75,13 +75,13 @@ class BattleCutscene(Cutscene):
                 attacker.hp -= move["damage"]
 
                 self.animate_move_and_stop_text(
-                    "heal", (attacker.rect.centerx, attacker.rect.centery), 120
+                    "heal", (attacker.rect.centerx, attacker.rect.centery), 50
                 )
                 return f'{attacker.name} used {move["name"]} healing for {-move["damage"]} health!'
             else:
                 defender.hp -= move["damage"]
                 self.animate_move_and_stop_text(
-                    move["name"], (defender.rect.centerx, defender.rect.centery), 120
+                    move["name"], (defender.rect.centerx, defender.rect.centery), 50
                 )
                 return (
                     f'{attacker.name} used {move["name"]} for {move["damage"]} damage!'
@@ -113,7 +113,7 @@ class BattleCutscene(Cutscene):
             sprite = pygame.transform.scale(sprite, (width, height))
 
             self.screen.blit(sprite, (pos[0] - width / 2, pos[1] - height / 2))
-            pygame.display.update(self.screen) 
+            pygame.display.update() 
             pygame.time.delay(delay)
             self.full_update()
 
