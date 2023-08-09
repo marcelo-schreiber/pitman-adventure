@@ -1,8 +1,9 @@
 from random import random
+from utils import import_folder
 
 from cutscene import Cutscene
 import pygame
-from settings import moves
+from settings import moves, TILESIZE
 from textbox import Textbox
 
 
@@ -55,14 +56,9 @@ class BattleCutscene(Cutscene):
         else:
             return None
 
-    @staticmethod
     def attack(
-            move: str | None, attacker: pygame.sprite.Sprite, defender: pygame.sprite.Sprite
+            self, move: str | None, attacker: pygame.sprite.Sprite, defender: pygame.sprite.Sprite
     ) -> str:
-        if move is None:
-            move = attacker.attack()
-
-        # random float between 0 and 1
         accuracy = random()
 
         move = moves[move]
@@ -74,11 +70,13 @@ class BattleCutscene(Cutscene):
             if is_heal:
                 # heal
                 attacker.hp -= move["damage"]
+
+                self.animate_move_and_stop_text("heal", (attacker.rect.centerx, attacker.rect.centery), 60)
                 return f'{attacker.name} used {move["name"]} healing for {-move["damage"]} health!'
             else:
                 defender.hp -= move["damage"]
+                self.animate_move_and_stop_text(move["name"], (defender.rect.centerx, defender.rect.centery), 60)
                 return f'{attacker.name} used {move["name"]} for {move["damage"]} damage!'
-
         else:
             # miss
             return f'{attacker.name} attack {move["name"]} missed!'
@@ -91,6 +89,20 @@ class BattleCutscene(Cutscene):
             return "yellow"
         else:
             return "red"
+
+    def animate_move_and_stop_text(self, move: str, pos: tuple[int, int], delay: int, width=2 * TILESIZE,
+                                   height=2 * TILESIZE):
+
+        sprites = import_folder(f"graphics/particles/{move}")
+
+        for sprite in sprites:
+            sprite = pygame.transform.scale(sprite, (width, height))
+
+            self.screen.blit(sprite, (pos[0] - width / 2, pos[1] - height / 2))
+            pygame.display.flip()
+            pygame.time.delay(delay)
+
+            self.full_update()
 
     def make_a_move(self, move: str):
         is_player_turn = self.turn % 2 == 0
@@ -106,7 +118,9 @@ class BattleCutscene(Cutscene):
             if self.text_box.active:
                 return
 
-            self.action_text = self.attack(None, self.enemy, self.player)
+            move = self.enemy.attack()
+
+            self.action_text = self.attack(move, self.enemy, self.player)
             self.next_turn()
 
     def update(self):

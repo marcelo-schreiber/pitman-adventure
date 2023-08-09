@@ -61,6 +61,13 @@ class Cutscene:
         self.actors.append(actor)
         return actor
 
+    def full_update(self):
+        self.screen.fill("black")
+        self.background("images/background_battle_image.jpg")
+        self.draw()
+        self.write_texts()
+        self.update_screen()
+
     def display_specific_text_slowly(
         self, text: str, x: int, y: int, color: str, speed=50
     ):
@@ -71,11 +78,7 @@ class Cutscene:
         for char in text:
             text_obj.text += char
             text_obj.x += self.get_text_size(char)[0] // 2
-            self.screen.fill("black")
-            self.background("images/background_battle_image.jpg")
-            self.draw()
-            self.write_texts()
-            self.update_screen()
+            self.full_update()
             pygame.time.delay(speed)
         self.displaying_specific_text = False
 
@@ -143,11 +146,7 @@ class Cutscene:
                     if event.key == pygame.K_ESCAPE or event.key == pygame.K_RETURN:
                         self.is_running = False
 
-            self.screen.fill("black")
-            self.background("images/background_battle_image.jpg")
-            self.draw()
-            self.write_texts()
-            self.update_screen()
+            self.full_update()
 
     def update(self):
         raise NotImplementedError(
