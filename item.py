@@ -11,4 +11,6 @@ class Item(Tile):
         self.hitbox = self.rect.inflate_ip(-26, -26)
 
     def show_text(self):
-        self.textbox.start_text(messages=[f"You found a {self.name}!"], func=self.apply_effect)
+        self.textbox.start_text(
+            messages=[f"You found a {self.name}!"], func=self.apply_effect
+        )

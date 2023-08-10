@@ -89,10 +89,17 @@ class Level:
                     # if style == 'object':
                     #     Tile((x, y), [self.obstacle_sprites], 'object')
 
-                    if style == 'item':
-                        random_grass_surface = random.choice(graphics['items'])
+                    if style == "item":
+                        random_grass_surface = random.choice(graphics["items"])
                         random_effect = random.choice(list(effects.keys()))
-                        Item((x, y), [self.visible_sprites, self.grass_sprites], 'item', random_grass_surface, random_effect, effects[random_effect])
+                        Item(
+                            (x, y),
+                            [self.visible_sprites, self.grass_sprites],
+                            "item",
+                            random_grass_surface,
+                            random_effect,
+                            effects[random_effect],
+                        )
 
                     # if style == 'npcs':
                     #     Npc([self.visible_sprites, self.npc_sprites], (x, y))

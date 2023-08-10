@@ -21,7 +21,7 @@ class Player(pygame.sprite.Sprite):
 
         self.obstacle_sprites = obstacle_sprites
         self.chance_of_encounter_per_tick = 1 / (
-                3 * FPS
+            3 * FPS
         )  # 1 encounter per 3 seconds moving (60 FPS)
 
         self.npc_sprites = npc_sprites
@@ -118,7 +118,7 @@ class Player(pygame.sprite.Sprite):
     def increase_damage(self):
         for move in self.moves:
             move_stats = self.moves[move]
-            if move_stats["damage"] < 0: # if is a heal move
+            if move_stats["damage"] < 0:  # if is a heal move
                 continue
 
             move_stats["damage"] += 10
