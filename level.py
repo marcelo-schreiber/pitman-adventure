@@ -1,4 +1,5 @@
 import pygame
+from item import Item
 from settings import *
 from tile import Tile
 from player import Player
@@ -59,13 +60,19 @@ class Level:
     def create_map(self):
         layouts = {  # list of layouts (collision, visuals, etc)
             "boundary": import_csv_layout("map/map_Collision.csv"),
-            "grass": import_csv_layout("map/map_Grass.csv"),
+            "item": import_csv_layout("map/map_Items.csv"),
             "object": import_csv_layout("map/map_LargeObjects.csv"),
             "details": import_csv_layout("map/map_Details.csv"),
         }
 
         graphics = {  # list of images
-            "grass": import_folder("graphics/grass"),
+            "items": import_folder("graphics/grass"),
+        }
+
+        effects = {
+            "health potion": lambda: self.player.heal(),
+            "accuracy potion": lambda: self.player.increase_accuracy(),
+            "damage potion": lambda: self.player.increase_damage(),
         }
 
         for style, layout in layouts.items():
@@ -82,9 +89,17 @@ class Level:
                     # if style == 'object':
                     #     Tile((x, y), [self.obstacle_sprites], 'object')
 
-                    # if style == 'grass':
-                    #     random_grass_surface = random.choice(graphics['grass'])
-                    #     Tile((x, y), [self.visible_sprites, self.grass_sprites], 'grass', random_grass_surface)
+                    if style == "item":
+                        random_grass_surface = random.choice(graphics["items"])
+                        random_effect = random.choice(list(effects.keys()))
+                        Item(
+                            (x, y),
+                            [self.visible_sprites, self.grass_sprites],
+                            "item",
+                            random_grass_surface,
+                            random_effect,
+                            effects[random_effect],
+                        )
 
                     # if style == 'npcs':
                     #     Npc([self.visible_sprites, self.npc_sprites], (x, y))
