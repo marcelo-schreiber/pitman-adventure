@@ -21,7 +21,7 @@ class Player(pygame.sprite.Sprite):
 
         self.obstacle_sprites = obstacle_sprites
         self.chance_of_encounter_per_tick = 1 / (
-            3 * FPS
+                3 * FPS
         )  # 1 encounter per 3 seconds moving (60 FPS)
 
         self.npc_sprites = npc_sprites
@@ -51,6 +51,7 @@ class Player(pygame.sprite.Sprite):
         }
 
         self.talking_image = pygame.image.load("images/danites3.png").convert_alpha()
+        self.moves = moves.copy()
 
     def input(self):
         keys = pygame.key.get_pressed()
@@ -101,15 +102,26 @@ class Player(pygame.sprite.Sprite):
                         self.hitbox.top = sprite.hitbox.bottom
 
     def random_encounter(self):
-        is_colliding = pygame.sprite.spritecollideany(self, self.npc_sprites)
-        is_moving = self.direction.magnitude() != 0
+        is_colliding = pygame.sprite.spritecollide(self, self.grass_sprites, True)
 
-        if is_colliding and is_moving:
-            range_of_numbers = 1 / self.chance_of_encounter_per_tick
-            random_encounter = randint(1, range_of_numbers)
+        for sprite in is_colliding:
+            sprite.show_text()
 
-            if random_encounter == 1:
-                self.battle()
+    def heal(self):
+        self.hp += 10
+
+    def increase_accuracy(self):
+        for move in self.moves:
+            move_stats = self.moves[move]
+            move_stats["accuracy"] += 0.1
+
+    def increase_damage(self):
+        for move in self.moves:
+            move_stats = self.moves[move]
+            if move_stats["damage"] < 0: # if is a heal move
+                continue
+
+            move_stats["damage"] += 10
 
     def npc_interaction(self):
         npcs_collided = pygame.sprite.spritecollide(self, self.npc_sprites, False)
