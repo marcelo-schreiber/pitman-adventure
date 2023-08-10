@@ -9,11 +9,11 @@ from textbox import Textbox
 
 class BattleCutscene(Cutscene):
     def __init__(
-            self,
-            player: pygame.sprite.Sprite,
-            player_img: str,
-            enemy_img: str,
-            enemy: pygame.sprite.Sprite,
+        self,
+        player: pygame.sprite.Sprite,
+        player_img: str,
+        enemy_img: str,
+        enemy: pygame.sprite.Sprite,
     ) -> None:
         super().__init__()
         self.player_sprite = player
@@ -55,11 +55,16 @@ class BattleCutscene(Cutscene):
             return None
 
     def attack(
-            self, move: str | None, attacker: pygame.sprite.Sprite, defender: pygame.sprite.Sprite
+        self,
+        move: str | None,
+        attacker: pygame.sprite.Sprite,
+        defender: pygame.sprite.Sprite,
     ) -> str:
         accuracy = random()
 
-        move = attacker.moves[move]
+        move = attacker.moves[
+            move
+        ]  # get the move from the attacker, so in the future we can have different moves for different enemies and players
 
         is_heal = move["damage"] < 0
 
@@ -69,12 +74,18 @@ class BattleCutscene(Cutscene):
                 # heal
                 attacker.hp -= move["damage"]
 
-                self.animate_move_and_stop_text("heal", (attacker.rect.centerx, attacker.rect.centery), 60)
+                self.animate_move_and_stop_text(
+                    "heal", (attacker.rect.centerx, attacker.rect.centery), 50
+                )
                 return f'{attacker.name} used {move["name"]} healing for {-move["damage"]} health!'
             else:
                 defender.hp -= move["damage"]
-                self.animate_move_and_stop_text(move["name"], (defender.rect.centerx, defender.rect.centery), 60)
-                return f'{attacker.name} used {move["name"]} for {move["damage"]} damage!'
+                self.animate_move_and_stop_text(
+                    move["name"], (defender.rect.centerx, defender.rect.centery), 50
+                )
+                return (
+                    f'{attacker.name} used {move["name"]} for {move["damage"]} damage!'
+                )
         else:
             # miss
             return f'{attacker.name} attack {move["name"]} missed!'
@@ -88,18 +99,24 @@ class BattleCutscene(Cutscene):
         else:
             return "red"
 
-    def animate_move_and_stop_text(self, move: str, pos: tuple[int, int], delay: int, width=2 * TILESIZE,
-                                   height=2 * TILESIZE):
-
-        sprites = import_folder(f"graphics/particles/{move}")
+    def animate_move_and_stop_text(
+        self,
+        move: str,
+        pos: tuple[int, int],
+        delay: int,
+        width=2 * TILESIZE,
+        height=2 * TILESIZE,
+    ):
+        sprites = import_folder(
+            f"graphics/particles/{move.lower()}"
+        )  # lowercase the move name, only works on windows
 
         for sprite in sprites:
             sprite = pygame.transform.scale(sprite, (width, height))
 
             self.screen.blit(sprite, (pos[0] - width / 2, pos[1] - height / 2))
-            pygame.display.flip()
+            pygame.display.update()
             pygame.time.delay(delay)
-
             self.full_update()
 
     def make_a_move(self, move: str):
