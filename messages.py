@@ -89,3 +89,8 @@ catha = [
 ]
 
 dudu = catha
+
+orange = [
+    "It's an orange. Petrified.",
+    "It's a petrified orange",
+]

@@ -58,7 +58,7 @@ class Level:
         Npc(self.npc_sprites, (13, 42), "spirit", sign_d)
 
         # npcs
-        Npc(groups, (9, 10), "spirit", villager_1)
+        Npc(groups, (9, 10), "orange", orange)
         Npc(groups, (15, 11), "fenoxer", fenoxer)
         Npc(groups, (7, 15), "binder", binder)
         Npc(groups, (44, 19), "bruno", bruno)
@@ -78,10 +78,6 @@ class Level:
             "item": import_csv_layout("map/map_Items.csv"),
             "object": import_csv_layout("map/map_LargeObjects.csv"),
             "details": import_csv_layout("map/map_Details.csv"),
-        }
-
-        graphics = {  # list of images
-            "items": import_folder("graphics/grass"),
         }
 
         effects = {
