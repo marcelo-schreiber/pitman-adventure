@@ -56,7 +56,7 @@ leo = [
     "Leo: WARRIOR!",
     "Leo: OF!",
     "Leo: PEACE!",
-    "Dinossauro: ROOOOOAAAR!",
+    "Dinosaur: ROOOOOAAAR!",
     "Leo: HAH! There he is!",
     "Now eat this motherfuckaaaaaa!",
 ]
@@ -70,8 +70,26 @@ daniel = [
     "Daniel: Over my dead body!",
 ]
 
+bruno = [
+    "Bruno: Do you know the wagner group?",
+    "Bruno: And verstappen will win this race",
+    "Bruno: ...",
+    "Bruno: Hey brother, I hope your Eeevee is fine",
+]
+
 fenoxer_muie = [
     "Fenoxer: I'm gonna sell this Eevee",
     "Fenoxer: I need to save up for my surgery",
     "Fenoxer: Let's battle over it"
 ]
+
+catha = [
+    "Catharina: Bença meus fi",
+    "Marcos: Nipples in the air",
+    "Catharina: AMOR!",
+    "Marcos: calma!",
+    "Catharina: Dale",
+    "Marcos: Fuck you as you deny tou little bitch, cause you mother smells like shit!",
+]
+
+dudu = catha

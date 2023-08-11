@@ -58,7 +58,10 @@ class Level:
         Npc(groups, (9, 10), "spirit", villager_1)
         Npc(groups, (15, 11), "fenoxer", fenoxer)
         Npc(groups, (7, 15), "binder", binder)
+        Npc(groups, (45, 23), "bruno", bruno)
         Npc(groups, (15, 45), "careu", careu)
+        Npc(groups, (35, 17), "catha", catha)
+        Npc(groups, (35, 18), "dudu", dudu)
 
         # gym trainers (enemies)
         GymTrainer(groups, (8, 32), "leo", leo, self.player)
