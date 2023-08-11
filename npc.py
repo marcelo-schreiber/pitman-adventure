@@ -32,6 +32,8 @@ class GymTrainer(Npc):
 
         self.defeated = False
 
-
     def begin_interaction(self):
-        self.textbox.start_text(messages=self.messages, func=lambda: self.player.battle(self.imageurl, self.name))
+        self.textbox.start_text(
+            messages=self.messages,
+            func=lambda: self.player.battle(self.imageurl, self.name),
+        )

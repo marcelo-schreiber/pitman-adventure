@@ -52,6 +52,7 @@ class Textbox(metaclass=TSingletonMeta):
         self.handle_talking_end = lambda: None  # function that returns nothing
         self.sound = pygame.mixer.Sound("sounds/text.mp3")
         self.sound.set_volume(0.3)
+
     def input(self):
         keys = pygame.key.get_pressed()
 
