@@ -117,10 +117,17 @@ class BattleCutscene(Cutscene):
             f"graphics/particles/{move.lower()}"
         )  # lowercase the move name, only works on windows
 
-        pygame.mixer.music.load(f"sounds/{move.lower()}.mp3")
+        if not sprites:
+            sprites = import_folder(f"graphics/particles/medium")
+
+        try:
+            pygame.mixer.music.load(f"sounds/{move.lower()}.mp3")
+        except:
+            pygame.mixer.music.load(f"sounds/medium.mp3")
+
         pygame.mixer.music.play()
 
-        time.sleep(0.05)
+        time.sleep(0.1)
 
         for sprite in sprites:
             sprite = pygame.transform.scale(sprite, (width, height))

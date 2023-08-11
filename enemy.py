@@ -7,7 +7,7 @@ class Enemy:
     def __init__(self, hp, name):
         self.hp = hp
         self.max_hp = hp
-        self.moves = moves.copy()
+        self.moves = player_specific_moves[name] if name in player_specific_moves else default_moves
         self.name = name
 
     def attack(self) -> str:
