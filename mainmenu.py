@@ -1,4 +1,5 @@
 from cutscene import Cutscene
+import pygame
 
 
 class MainMenu(Cutscene):
@@ -8,4 +9,9 @@ class MainMenu(Cutscene):
         self.create_text("Press any key to start", 1000, 650, "white")
 
     def update(self):
-        pass
+        self.handle_events()
+
+    def handle_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                self.is_running = False
