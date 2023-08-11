@@ -11,6 +11,7 @@ from npc import Npc, GymTrainer
 from messages import *
 from mainmenu import MainMenu
 
+
 class Level:
     def __init__(self):
         # get the display surface
@@ -56,21 +57,19 @@ class Level:
         Npc(self.npc_sprites, (29, 32), "spirit", sign_c)
         Npc(self.npc_sprites, (13, 42), "spirit", sign_d)
 
-        
         # npcs
         Npc(groups, (9, 10), "spirit", villager_1)
         Npc(groups, (15, 11), "fenoxer", fenoxer)
         Npc(groups, (7, 15), "binder", binder)
         Npc(groups, (44, 19), "bruno", bruno)
-        Npc(groups, (13, 45), "careu", careu)
+        Npc(groups, (15, 45), "careu", careu)
         Npc(groups, (35, 17), "catha", catha)
         Npc(groups, (35, 18), "dudu", dudu)
         Npc(groups, (16, 30), "luis", villager_1)
 
-
         # gym trainers (enemies)
         GymTrainer(groups, (8, 32), "leo", leo, self.player)
-        GymTrainer(groups, (10, 45), "daniel", daniel, self.player)
+        GymTrainer(groups, (12, 45), "daniel", daniel, self.player)
         GymTrainer(groups, (30, 45), "fenoxer_muie", fenoxer_muie, self.player)
 
     def create_map(self):

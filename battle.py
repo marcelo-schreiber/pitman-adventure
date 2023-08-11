@@ -4,7 +4,7 @@ from utils import import_folder
 
 from cutscene import Cutscene
 import pygame
-from settings import moves, TILESIZE
+from settings import *
 from textbox import Textbox
 
 
@@ -59,10 +59,10 @@ class BattleCutscene(Cutscene):
         new_img = pygame.image.load(image).convert_alpha()
         new_img = pygame.transform.scale(new_img, (WIDTH, HEIGHT))
         self.screen.blit(new_img, (0, 0))
-        
+
     def attack(
         self,
-        move: str ,
+        move: str,
         attacker: pygame.sprite.Sprite,
         defender: pygame.sprite.Sprite,
     ) -> str:
