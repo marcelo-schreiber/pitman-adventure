@@ -25,7 +25,7 @@ class BattleCutscene(Cutscene):
         self.enemy = self.create_actor(
             enemy_img, 820, 285, 100, 100, enemy.hp, enemy.name
         )
-        self.turn = 0
+        self.turn = 0  # even is player, odd is enemy
 
         self.moves_text_initial()
 
