@@ -53,6 +53,14 @@ class Player(pygame.sprite.Sprite):
         self.talking_image = pygame.image.load("images/down.png").convert_alpha()
         self.moves = moves.copy()
 
+
+        self.song = pygame.mixer.Sound("sounds/city.mp3")
+        self.song.set_volume(0.3)
+        self.song.play(-1)
+
+        self.battle_song = pygame.mixer.Sound("sounds/battle.mp3")
+        self.battle_song.set_volume(0.3)
+
     def input(self):
         keys = pygame.key.get_pressed()
 
@@ -104,8 +112,14 @@ class Player(pygame.sprite.Sprite):
     def random_encounter(self):
         is_colliding = pygame.sprite.spritecollide(self, self.grass_sprites, True)
 
-        for sprite in is_colliding:
-            sprite.show_text()
+        if is_colliding:
+            self.song.stop()
+
+            for sprite in is_colliding:
+                sprite.show_text()
+            
+            self.song.play(-1)
+
 
     def heal(self):
         self.hp += 10
@@ -136,7 +150,8 @@ class Player(pygame.sprite.Sprite):
                 self.can_interact = True
 
     def battle(self):
-        print("battle")
+        self.song.stop()
+        self.battle_song.play(-1)
         enemy = Enemy(100, "Bamboo")
         cutscene = BattleCutscene(
             self,
@@ -145,6 +160,9 @@ class Player(pygame.sprite.Sprite):
             enemy,
         )
         cutscene.play()
+
+        self.battle_song.stop()
+        self.song.play(-1)
 
         if (cutscene.winner == "player"):
             self.wins += 1

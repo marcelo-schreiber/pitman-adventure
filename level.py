@@ -30,7 +30,6 @@ class Level:
 
         self.s1 = Textbox()
         self.s1.start_text(intro)
-
         self.create_npc()
 
     def initialize_player(self):

@@ -12,10 +12,10 @@ class Item(Tile):
         self.hitbox = self.rect.inflate_ip(-26, -26)
 
         self.sound = pygame.mixer.Sound("sounds/item.mp3")
-
+        self.sound.set_volume(0.15)
     def show_text(self):
         self.sound.play()
-        time.sleep(0.1)
+        time.sleep(0.2)
         self.textbox.start_text(
             messages=[f"You found a {self.name}!"], func=self.apply_effect
         )
