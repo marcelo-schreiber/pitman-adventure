@@ -55,6 +55,11 @@ class BattleCutscene(Cutscene):
         else:
             return None
 
+    def background(self, image: str):
+        new_img = pygame.image.load(image).convert_alpha()
+        new_img = pygame.transform.scale(new_img, (WIDTH, HEIGHT))
+        self.screen.blit(new_img, (0, 0))
+        
     def attack(
         self,
         move: str ,
