@@ -26,7 +26,7 @@ class Player(pygame.sprite.Sprite):
 
         self.npc_sprites = npc_sprites
         self.can_interact = True
-
+        self.wins = 0
         self.images = {
             "down": pygame.transform.scale(
                 pygame.image.load("images/down.png").convert_alpha(),
@@ -145,7 +145,10 @@ class Player(pygame.sprite.Sprite):
             enemy,
         )
         cutscene.play()
-        print(cutscene.winner)
+
+        if (cutscene.winner == "player"):
+            self.wins += 1
+            self.increase_accuracy() 
 
     def update(self):
         self.input()
