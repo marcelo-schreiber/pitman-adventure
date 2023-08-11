@@ -54,7 +54,7 @@ class Player(pygame.sprite.Sprite):
         self.moves = moves.copy()
 
         self.song = pygame.mixer.Sound("sounds/city.mp3")
-        self.song.set_volume(0.3)
+        self.song.set_volume(0.2)
         self.song.play(-1)
 
         self.battle_song = pygame.mixer.Sound("sounds/battle.mp3")
