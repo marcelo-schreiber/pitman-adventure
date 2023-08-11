@@ -90,13 +90,14 @@ class Level:
                     #     Tile((x, y), [self.obstacle_sprites], 'object')
 
                     if style == "item":
-                        random_grass_surface = random.choice(graphics["items"])
                         random_effect = random.choice(list(effects.keys()))
+                        random_surface_effect = pygame.image.load(f'graphics/objects/{random_effect}.png').convert_alpha()
+
                         Item(
                             (x, y),
                             [self.visible_sprites, self.grass_sprites],
                             "item",
-                            random_grass_surface,
+                            random_surface_effect,
                             random_effect,
                             effects[random_effect],
                         )
