@@ -23,15 +23,7 @@ fenoxer = [
     "Fenoxer: Maybe she went for walk in Parque Barigui!",
 ]
 
-fenoxer_muie = [
-    "Fenoxer: I'm so sorry for what happened.",
-    "Fenoxer: ",
-]
 
-careu = [
-    "Careu: I'm sorry to hear that, Arthur.",
-    "Careu: My boyfriend loves pizza, maybe he could help.",
-]
 
 sign_a = ["Mezosoic Kingdom"]
 
@@ -40,6 +32,11 @@ sign_b = ["Parque Barigui. This Way ->"]
 sign_c = ["BEWARE! COLOMBO AHEAD."]
 
 sign_d = ["Welcome to São José dos Pinhas!"]
+
+careu = [
+    "Careu: I'm sorry to hear that, Arthur.",
+    "Careu: My boyfriend loves pizza, maybe he could help.",
+]
 
 leo = [
     "Arthur: Hey Leo! Have you seen Eevee?",
