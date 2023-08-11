@@ -6,11 +6,11 @@ from settings import TILESIZE
 class Npc(pygame.sprite.Sprite):
     def __init__(self, groups, pos, name, messages):
         super().__init__(groups)
-        self.image = pygame.image.load("graphics/npcs/" + name + ".png").convert_alpha()
+        self.imageurl = f"graphics/npcs/{name}.png"
+        self.image = pygame.image.load(self.imageurl).convert_alpha()
         self.image = pygame.transform.scale(self.image, (TILESIZE, TILESIZE))
         pos = (pos[0] * TILESIZE, pos[1] * TILESIZE)
         self.rect = self.image.get_rect(topleft=pos)
-
         self.messages = messages
 
         self.textbox = Textbox()
@@ -32,5 +32,6 @@ class GymTrainer(Npc):
 
         self.defeated = False
 
+
     def begin_interaction(self):
-        self.textbox.start_text(messages=self.messages, func=self.player.battle)
+        self.textbox.start_text(messages=self.messages, func=lambda: self.player.battle(self.imageurl))

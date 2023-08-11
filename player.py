@@ -17,7 +17,7 @@ class Player(pygame.sprite.Sprite):
         self.name = "Arthur"
         self.grass_sprites = grass_sprites
         self.direction = pygame.math.Vector2()
-        self.speed = 4
+        self.speed = 12
 
         self.obstacle_sprites = obstacle_sprites
         self.chance_of_encounter_per_tick = 1 / (
@@ -135,7 +135,7 @@ class Player(pygame.sprite.Sprite):
             if move_stats["damage"] < 0:  # if is a heal move
                 continue
 
-            move_stats["damage"] += 10
+            move_stats["damage"] += 5
 
     def npc_interaction(self):
         npcs_collided = pygame.sprite.spritecollide(self, self.npc_sprites, False)
@@ -149,14 +149,14 @@ class Player(pygame.sprite.Sprite):
             if not self.can_interact:
                 self.can_interact = True
 
-    def battle(self):
+    def battle(self, imageurl):
         self.song.stop()
         self.battle_song.play(-1)
         enemy = Enemy(100, "Bamboo")
         cutscene = BattleCutscene(
             self,
             "images/up.png",
-            "graphics/monsters/bamboo/attack/0.png",
+            imageurl,
             enemy,
         )
         cutscene.play()

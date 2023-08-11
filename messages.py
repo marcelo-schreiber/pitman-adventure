@@ -26,7 +26,7 @@ sign_b = ["Parque Barigui. This Way ->"]
 
 sign_c = ["BEWARE! COLOMBO AHEAD."]
 
-sign_d = ["Welcome to Pinhais!"]
+sign_d = ["Welcome to São José dos Pinhas!"]
 
 leo = [
     "Arthur: Hey Leo! Have you seen Eevee?",
@@ -46,4 +46,13 @@ leo = [
     "Dinossauro: ROOOOOAAAR!",
     "Leo: HAH! There he is!",
     "Now eat this motherfuckaaaaaa!",
+]
+
+daniel = [
+    "Daniel: ...Carolina Wecka is such a bitch...",
+    "Daniel: ... oh",
+    "Daniel: Hey Fixller, is your Eevee ok?",
+    "Arthur: No, I need your help",
+    "Arthur: Can I have your pizza to lure my Eevee?",
+    "Daniel: Over my dead body!",
 ]

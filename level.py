@@ -55,6 +55,7 @@ class Level:
         Npc(self.npc_sprites, (13, 42), "spirit", sign_d)
 
         GymTrainer(groups, (8, 32), "spirit", leo, self.player)
+        GymTrainer(groups, (12, 42), "daniel", daniel, self.player)
 
     def create_map(self):
         layouts = {  # list of layouts (collision, visuals, etc)
