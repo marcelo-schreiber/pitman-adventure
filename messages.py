@@ -37,13 +37,26 @@ careu = [
     "Careu: My boyfriend loves pizza, maybe he could help.",
 ]
 
+luis = [
+    "Arthur: Hey Luis! Have you seen my Eevee?",
+    "Luis: What is your name?",
+    "Arthur: ... we know each other. I'm Fixller",
+    "Luis: What is your quest?",
+    "Arthur: I guess it's to find my Eevee, but...",
+    "Luis: What's the air-speed velocity of a sonic rainboom?",
+    "Arthur: ... that's a My Little Pony thing isn't it?",
+    "Arthur: Well I don't know.",
+    "Arthur: Since you're not helping, I'll be on my way",
+    "Luis: ...Wait! I might actually have an idea",
+]
+
 leo = [
     "Arthur: Hey Leo! Have you seen Eevee?",
     "Leo: BROUHAHA!",
     "Arthur: What?",
-    "Leo: I’ll never let you find her!",
-    "Arthur: You won’t stay in my path! I must find Evee!",
-    "Leo: Don’t underestimate me, Fixller!",
+    "Leo: I'll never let you find her!",
+    "Arthur: You won't stay in my path! I must find Evee!",
+    "Leo: Don't underestimate me, Fixller!",
     "Leo: For I am the High Priest of the Dinosaurs!",
     "Leo: And warrior of peace!",
     "Leo: …",
