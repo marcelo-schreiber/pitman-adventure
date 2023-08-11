@@ -12,7 +12,7 @@ class Npc(pygame.sprite.Sprite):
         pos = (pos[0] * TILESIZE, pos[1] * TILESIZE)
         self.rect = self.image.get_rect(topleft=pos)
         self.messages = messages
-
+        self.name = name
         self.textbox = Textbox()
 
     def begin_interaction(self):
@@ -34,4 +34,4 @@ class GymTrainer(Npc):
 
 
     def begin_interaction(self):
-        self.textbox.start_text(messages=self.messages, func=lambda: self.player.battle(self.imageurl))
+        self.textbox.start_text(messages=self.messages, func=lambda: self.player.battle(self.imageurl, self.name))

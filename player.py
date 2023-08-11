@@ -149,10 +149,10 @@ class Player(pygame.sprite.Sprite):
             if not self.can_interact:
                 self.can_interact = True
 
-    def battle(self, imageurl):
+    def battle(self, imageurl, name):
         self.song.stop()
         self.battle_song.play(-1)
-        enemy = Enemy(100, "Bamboo")
+        enemy = Enemy(100, name)
         cutscene = BattleCutscene(
             self,
             "images/up.png",
