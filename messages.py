@@ -84,12 +84,12 @@ fenoxer_muie = [
 ]
 
 catha = [
-    "Catharina: Bença meus fi",
-    "Marcos: Nipples in the air",
-    "Catharina: AMOR!",
-    "Marcos: calma!",
-    "Catharina: Dale",
-    "Marcos: Fuck you as you deny tou little bitch, cause you mother smells like shit!",
+    "Catha: Bença meus fi",
+    "Dudu: Nipples in the air",
+    "Catha: AMOR!",
+    "Dudu: calma!",
+    "Catha: Dale",
+    "Dudu: Fuck you as you deny tou little bitch, cause you mother smells like shit!",
 ]
 
 dudu = catha

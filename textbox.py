@@ -107,6 +107,12 @@ class Textbox(metaclass=TSingletonMeta):
         is_icon_a_file = Path(self.icon).is_file()
 
         if is_icon_a_file:
+            name = self.icon.split("/")[-1].split(".")[0]
+            talking_names = self.current_text.split(":")
+            talking_name = talking_names[0].lower()
+            if name != talking_name and len(talking_names) == 2:
+                self.icon = f"graphics/icons/{talking_name}_icon.png" # dumb way to do it
+
             icon = pygame.image.load(self.icon).convert_alpha()
             icon = pygame.transform.scale(icon, (144, 144))
             self.display_surface.blit(icon, (0, 0))
