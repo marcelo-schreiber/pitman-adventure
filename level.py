@@ -9,7 +9,7 @@ import random
 from textbox import *
 from npc import Npc, GymTrainer
 from messages import *
-
+from mainmenu import MainMenu
 
 class Level:
     def __init__(self):
@@ -21,6 +21,9 @@ class Level:
         self.obstacle_sprites = pygame.sprite.Group()
         self.grass_sprites = pygame.sprite.Group()  # for random encounter
         self.npc_sprites = pygame.sprite.Group()
+
+        mainmenu = MainMenu()
+        mainmenu.play()
 
         # sprite setup
         self.create_map()
@@ -59,7 +62,7 @@ class Level:
         Npc(groups, (15, 11), "fenoxer", fenoxer)
         Npc(groups, (7, 15), "binder", binder)
         Npc(groups, (44, 19), "bruno", bruno)
-        Npc(groups, (15, 45), "careu", careu)
+        Npc(groups, (13, 45), "careu", careu)
         Npc(groups, (35, 17), "catha", catha)
         Npc(groups, (35, 18), "dudu", dudu)
         Npc(groups, (16, 30), "luis", villager_1)
@@ -67,7 +70,7 @@ class Level:
 
         # gym trainers (enemies)
         GymTrainer(groups, (8, 32), "leo", leo, self.player)
-        GymTrainer(groups, (12, 45), "daniel", daniel, self.player)
+        GymTrainer(groups, (10, 45), "daniel", daniel, self.player)
         GymTrainer(groups, (30, 45), "fenoxer_muie", fenoxer_muie, self.player)
 
     def create_map(self):
