@@ -24,7 +24,6 @@ fenoxer = [
 ]
 
 
-
 sign_a = ["Mezosoic Kingdom"]
 
 sign_b = ["Parque Barigui. This Way ->"]
@@ -77,7 +76,7 @@ bruno = [
 fenoxer_muie = [
     "Fenoxer: I'm gonna sell this Eevee",
     "Fenoxer: I need to save up for my ruacutan",
-    "Fenoxer: Let's battle over it"
+    "Fenoxer: Let's battle over it",
 ]
 
 catha = [

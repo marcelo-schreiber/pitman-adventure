@@ -103,7 +103,6 @@ class Textbox(metaclass=TSingletonMeta):
             self.char_idx + self.character_speed, len(self.current_text)
         )
 
-
         is_icon_a_file = Path(self.icon).is_file()
 
         if is_icon_a_file:
@@ -112,7 +111,7 @@ class Textbox(metaclass=TSingletonMeta):
             talking_name = talking_names[0].lower()
             newicon = ""
             if name != talking_name and len(talking_names) == 2:
-                newicon = f"graphics/icons/{talking_name}_icon.png" # dumb way to do it
+                newicon = f"graphics/icons/{talking_name}_icon.png"  # dumb way to do it
 
             try:
                 icon = pygame.image.load(newicon).convert_alpha()

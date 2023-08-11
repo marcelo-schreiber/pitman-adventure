@@ -16,7 +16,9 @@ class Npc(pygame.sprite.Sprite):
         self.textbox = Textbox()
 
     def begin_interaction(self):
-        self.textbox.start_text(messages=self.messages, icon=f"graphics/icons/{self.name.lower()}_icon.png")
+        self.textbox.start_text(
+            messages=self.messages, icon=f"graphics/icons/{self.name.lower()}_icon.png"
+        )
 
     def update(self):
         pass
@@ -36,5 +38,5 @@ class GymTrainer(Npc):
         self.textbox.start_text(
             messages=self.messages,
             func=lambda: self.player.battle(self.imageurl, self.name),
-            icon=f"graphics/icons/{self.name.lower()}_icon.png"
+            icon=f"graphics/icons/{self.name.lower()}_icon.png",
         )

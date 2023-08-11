@@ -115,7 +115,6 @@ class Player(pygame.sprite.Sprite):
             for sprite in is_colliding:
                 sprite.show_text()
 
-
     def heal(self):
         self.hp += 10
 
