@@ -110,6 +110,7 @@ class Textbox(metaclass=TSingletonMeta):
             talking_names = self.current_text.split(":")
             talking_name = talking_names[0].lower()
             newicon = ""
+            
             if name != talking_name and len(talking_names) == 2:
                 newicon = f"graphics/icons/{talking_name}_icon.png"  # dumb way to do it
 

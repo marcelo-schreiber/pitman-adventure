@@ -35,7 +35,7 @@ class Cutscene:
                 self.rect.x = x
                 self.rect.y = y
                 self.type = "image_file"
-            except FileNotFoundError:
+            except:
                 self.image = name
                 self.rect = pygame.Rect(x, y, width, height)
                 self.type = "solid_color"
