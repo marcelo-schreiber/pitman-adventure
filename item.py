@@ -1,4 +1,3 @@
-import time
 from tile import Tile
 from textbox import Textbox
 import pygame

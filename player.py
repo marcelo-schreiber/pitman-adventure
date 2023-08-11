@@ -112,12 +112,9 @@ class Player(pygame.sprite.Sprite):
         is_colliding = pygame.sprite.spritecollide(self, self.grass_sprites, True)
 
         if is_colliding:
-            self.song.stop()
-
             for sprite in is_colliding:
                 sprite.show_text()
 
-            self.song.play(-1)
 
     def heal(self):
         self.hp += 10
