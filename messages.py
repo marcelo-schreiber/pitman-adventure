@@ -76,7 +76,7 @@ bruno = [
 
 fenoxer_muie = [
     "Fenoxer: I'm gonna sell this Eevee",
-    "Fenoxer: I need to save up for my surgery",
+    "Fenoxer: I need to save up for my ruacutan",
     "Fenoxer: Let's battle over it"
 ]
 
