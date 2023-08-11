@@ -8,7 +8,7 @@ from battle import BattleCutscene
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, groups, obstacle_sprites, grass_sprites, npc_sprites):
         super().__init__(groups)
-        self.image = pygame.image.load("images/danites3.png").convert_alpha()
+        self.image = pygame.image.load("images/down.png").convert_alpha()
         self.image = pygame.transform.scale(self.image, (TILESIZE, TILESIZE))
         self.rect = self.image.get_rect(topleft=pos)
         self.hitbox = self.rect.inflate(0, -26)
@@ -17,7 +17,7 @@ class Player(pygame.sprite.Sprite):
         self.name = "Arthur"
         self.grass_sprites = grass_sprites
         self.direction = pygame.math.Vector2()
-        self.speed = 5 
+        self.speed = 4
 
         self.obstacle_sprites = obstacle_sprites
         self.chance_of_encounter_per_tick = 1 / (
@@ -29,20 +29,20 @@ class Player(pygame.sprite.Sprite):
 
         self.images = {
             "down": pygame.transform.scale(
-                pygame.image.load("images/danites1.png").convert_alpha(),
-                (TILESIZE, TILESIZE),
-            ),
-            "left": pygame.transform.scale(
-                pygame.image.load("images/danites3.png").convert_alpha(),
-                (TILESIZE, TILESIZE),
-            ),
-            "up": pygame.transform.scale(
-                pygame.image.load("images/danites2.png").convert_alpha(),
+                pygame.image.load("images/down.png").convert_alpha(),
                 (TILESIZE, TILESIZE),
             ),
             "right": pygame.transform.scale(
+                pygame.image.load("images/right.png").convert_alpha(),
+                (TILESIZE, TILESIZE),
+            ),
+            "up": pygame.transform.scale(
+                pygame.image.load("images/up.png").convert_alpha(),
+                (TILESIZE, TILESIZE),
+            ),
+            "left": pygame.transform.scale(
                 pygame.transform.flip(
-                    pygame.image.load("images/danites3.png").convert_alpha(),
+                    pygame.image.load("images/right.png").convert_alpha(),
                     True,
                     False,
                 ),
@@ -50,7 +50,7 @@ class Player(pygame.sprite.Sprite):
             ),
         }
 
-        self.talking_image = pygame.image.load("images/danites3.png").convert_alpha()
+        self.talking_image = pygame.image.load("images/down.png").convert_alpha()
         self.moves = moves.copy()
 
     def input(self):
@@ -140,7 +140,7 @@ class Player(pygame.sprite.Sprite):
         enemy = Enemy(100, "Bamboo")
         cutscene = BattleCutscene(
             self,
-            "images/danites2.png",
+            "images/up.png",
             "graphics/monsters/bamboo/attack/0.png",
             enemy,
         )

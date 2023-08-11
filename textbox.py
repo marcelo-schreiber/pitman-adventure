@@ -30,7 +30,7 @@ class TSingletonMeta(type):
 class Textbox(metaclass=TSingletonMeta):
     def __init__(self):
         self.display_surface = pygame.display.get_surface()
-        self.font = pygame.font.Font("font/PressStart2P-Regular.ttf", 22)
+        self.font = pygame.font.Font("font/PressStart2P-Regular.ttf", 20)
         self.text_background = pygame.image.load(
             "images/background-text.png"
         ).convert_alpha()
