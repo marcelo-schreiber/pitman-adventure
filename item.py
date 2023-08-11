@@ -17,7 +17,6 @@ class Item(Tile):
 
     def show_text(self):
         self.sound.play()
-        time.sleep(0.2)
         self.textbox.start_text(
             messages=[f"You found a {self.name}!"], func=self.apply_effect
         )
