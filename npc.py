@@ -4,7 +4,7 @@ from settings import TILESIZE
 
 
 class Npc(pygame.sprite.Sprite):
-    def __init__(self, groups, pos, name, messages):
+    def __init__(self, groups, pos, name, messages, after_text_func=lambda : None):
         super().__init__(groups)
         self.imageurl = f"graphics/npcs/{name}.png"
         self.image = pygame.image.load(self.imageurl).convert_alpha()
@@ -14,10 +14,10 @@ class Npc(pygame.sprite.Sprite):
         self.messages = messages
         self.name = name
         self.textbox = Textbox()
-
+        self.after_text_func = after_text_func
     def begin_interaction(self):
         self.textbox.start_text(
-            messages=self.messages, icon=f"graphics/icons/{self.name.lower()}_icon.png"
+            messages=self.messages, func=self.after_text_func ,icon=f"graphics/icons/{self.name.lower()}_icon.png"
         )
 
     def update(self):

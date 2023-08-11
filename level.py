@@ -48,6 +48,13 @@ class Level:
             self.npc_sprites,
         )
 
+    def give_player_item(self, item):
+        sound = pygame.mixer.Sound("sounds/item.mp3")
+        sound.set_volume(0.5)
+        sound.play()
+        self.item = Textbox()
+        self.item.start_text([f"You got a {item}!"])
+
     def create_npc(self):
         groups = [self.visible_sprites, self.npc_sprites]
 
@@ -65,7 +72,7 @@ class Level:
         Npc(groups, (15, 45), "careu", careu)
         Npc(groups, (35, 17), "catha", catha)
         Npc(groups, (35, 18), "dudu", dudu)
-        Npc(groups, (16, 30), "luis", villager_1)
+        Npc(groups, (16, 30), "luis", luis, lambda : self.give_player_item("health potion"))
 
         # gym trainers (enemies)
         GymTrainer(groups, (8, 32), "leo", leo, self.player)
