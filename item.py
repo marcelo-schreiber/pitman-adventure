@@ -12,7 +12,7 @@ class Item(Tile):
         self.hitbox = self.rect.inflate_ip(-26, -26)
 
         self.sound = pygame.mixer.Sound("sounds/item.mp3")
-        self.sound.set_volume(0.15)
+        self.sound.set_volume(0.5)
 
     def show_text(self):
         self.sound.play()
