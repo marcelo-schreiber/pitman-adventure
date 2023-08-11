@@ -110,12 +110,20 @@ class Textbox(metaclass=TSingletonMeta):
             name = self.icon.split("/")[-1].split(".")[0]
             talking_names = self.current_text.split(":")
             talking_name = talking_names[0].lower()
+            newicon = ""
             if name != talking_name and len(talking_names) == 2:
-                self.icon = f"graphics/icons/{talking_name}_icon.png" # dumb way to do it
+                newicon = f"graphics/icons/{talking_name}_icon.png" # dumb way to do it
 
-            icon = pygame.image.load(self.icon).convert_alpha()
-            icon = pygame.transform.scale(icon, (144, 144))
-            self.display_surface.blit(icon, (0, 0))
+            try:
+                icon = pygame.image.load(newicon).convert_alpha()
+                icon = pygame.transform.scale(icon, (144, 144))
+                self.display_surface.blit(icon, (0, 0))
+            except Exception as e:
+                icon = pygame.image.load(self.icon).convert_alpha()
+                icon = pygame.transform.scale(icon, (144, 144))
+                self.display_surface.blit(icon, (0, 0))
+                print(e)
+
             self.display_surface.blit(text_surface, (165, 60))
         else:
             self.display_surface.blit(text_surface, (100, 60))
