@@ -57,7 +57,7 @@ class BattleCutscene(Cutscene):
 
     def attack(
         self,
-        move: str | None,
+        move: str ,
         attacker: pygame.sprite.Sprite,
         defender: pygame.sprite.Sprite,
     ) -> str:
