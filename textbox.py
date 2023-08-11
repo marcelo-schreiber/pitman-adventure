@@ -46,11 +46,12 @@ class Textbox(metaclass=TSingletonMeta):
 
         self.pressed = False
 
-        self.character_speed = 0.5
+        self.character_speed = 0.4
         self.char_idx: float = 0
 
         self.handle_talking_end = lambda: None  # function that returns nothing
-
+        self.sound = pygame.mixer.Sound("sounds/text.mp3")
+        self.sound.set_volume(0.3)
     def input(self):
         keys = pygame.key.get_pressed()
 
@@ -62,6 +63,7 @@ class Textbox(metaclass=TSingletonMeta):
                 self.pressed = True
                 return
             self.iterator += 1
+            self.sound.play()
             if self.iterator == len(self.messages):
                 self.active = False
                 if self.handle_talking_end is not None:
