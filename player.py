@@ -17,7 +17,7 @@ class Player(pygame.sprite.Sprite):
         self.name = "Arthur"
         self.grass_sprites = grass_sprites
         self.direction = pygame.math.Vector2()
-        self.speed = 7
+        self.speed = 5 
 
         self.obstacle_sprites = obstacle_sprites
         self.chance_of_encounter_per_tick = 1 / (

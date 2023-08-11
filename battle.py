@@ -1,4 +1,5 @@
 from random import random
+import time
 from utils import import_folder
 
 from cutscene import Cutscene
@@ -111,6 +112,11 @@ class BattleCutscene(Cutscene):
             f"graphics/particles/{move.lower()}"
         )  # lowercase the move name, only works on windows
 
+        pygame.mixer.music.load(f"sounds/{move.lower()}.mp3")
+        pygame.mixer.music.play()
+
+        time.sleep(0.05)
+
         for sprite in sprites:
             sprite = pygame.transform.scale(sprite, (width, height))
 
@@ -119,6 +125,7 @@ class BattleCutscene(Cutscene):
             pygame.time.delay(delay)
             self.full_update()
 
+        
     def make_a_move(self, move: str):
         is_player_turn = self.turn % 2 == 0
 

@@ -8,6 +8,9 @@ from settings import *
 class Game:
     def __init__(self):
         pygame.init()
+        pygame.mixer.init()
+
+        pygame.mixer.music.set_volume(0.7)
 
         pygame.display.set_caption("demo")
 
@@ -15,6 +18,7 @@ class Game:
         self.clock = pygame.time.Clock()
 
         self.level = Level()
+
 
     def run(self):
         while True:
