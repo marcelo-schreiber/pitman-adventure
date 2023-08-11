@@ -53,7 +53,7 @@ leo = [
 
 daniel = [
     "Daniel: ...Carolina Wecka is such a bitch...",
-    "Daniel: ... oh",
+    "Daniel: ...oh",
     "Daniel: Hey Fixller, is your Eevee ok?",
     "Arthur: No, I need your help",
     "Arthur: Can I have your pizza to lure my Eevee?",

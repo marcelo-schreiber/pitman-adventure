@@ -6,7 +6,7 @@
 # Instancie a classe Textbox e chame start_text com uma lista de strings.
 # Isso irá pausar o jogo e começar a mostrar o texto.
 # Quando o texto acabar, o jogo irá despausar.
-
+from pathlib import Path
 import pygame
 from settings import WIDTH, HEIGHT
 
@@ -43,6 +43,7 @@ class Textbox(metaclass=TSingletonMeta):
         self.current_text = ""
 
         self.active = False
+        self.icon = ""
 
         self.pressed = False
 
@@ -76,7 +77,7 @@ class Textbox(metaclass=TSingletonMeta):
         else:
             self.pressed = False
 
-    def start_text(self, messages: [str], func=lambda: None):
+    def start_text(self, messages: [str], func=lambda: None, icon=""):
         self.active = True
         self.iterator = 0
         self.messages = messages
@@ -84,6 +85,7 @@ class Textbox(metaclass=TSingletonMeta):
 
         self.current_text = self.messages[self.iterator]
         self.char_idx = 0
+        self.icon = icon
 
     def after_fire(self):
         self.handle_talking_end()
@@ -95,12 +97,22 @@ class Textbox(metaclass=TSingletonMeta):
         text_to_draw = self.current_text[: int(self.char_idx)]
         text_surface = self.font.render(text_to_draw, True, "Black")
         self.display_surface.blit(self.text_background, (0, 0))
-        self.display_surface.blit(text_surface, (100, 55))
 
         # update character index
         self.char_idx = min(
             self.char_idx + self.character_speed, len(self.current_text)
         )
+
+
+        is_icon_a_file = Path(self.icon).is_file()
+
+        if is_icon_a_file:
+            icon = pygame.image.load(self.icon).convert_alpha()
+            icon = pygame.transform.scale(icon, (144, 144))
+            self.display_surface.blit(icon, (0, 0))
+            self.display_surface.blit(text_surface, (165, 60))
+        else:
+            self.display_surface.blit(text_surface, (100, 60))
 
     def update(self):
         if self.active:

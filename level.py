@@ -48,13 +48,13 @@ class Level:
         groups = [self.visible_sprites, self.npc_sprites]
         Npc(groups, (9, 10), "spirit", villager_1)
         Npc(groups, (7, 15), "binder", villager_2)
-        Npc(groups, (15, 11), "fenoxer", villager_3)
         Npc(self.npc_sprites, (18, 26), "spirit", sign_a)
         Npc(self.npc_sprites, (29, 17), "spirit", sign_b)
         Npc(self.npc_sprites, (29, 32), "spirit", sign_c)
         Npc(self.npc_sprites, (13, 42), "spirit", sign_d)
 
-        GymTrainer(groups, (8, 32), "spirit", leo, self.player)
+        Npc(groups, (15, 11), "fenoxer", villager_3)
+        GymTrainer(groups, (8, 32), "leo", leo, self.player)
         GymTrainer(groups, (12, 45), "daniel", daniel, self.player)
 
     def create_map(self):
