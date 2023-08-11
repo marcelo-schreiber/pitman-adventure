@@ -3,6 +3,7 @@ from tile import Tile
 from textbox import Textbox
 import pygame
 
+
 class Item(Tile):
     def __init__(self, pos, groups, sprite_type, surface, name, apply_effect):
         super().__init__(pos, groups, sprite_type, surface)
@@ -13,10 +14,10 @@ class Item(Tile):
 
         self.sound = pygame.mixer.Sound("sounds/item.mp3")
         self.sound.set_volume(0.15)
+
     def show_text(self):
         self.sound.play()
         time.sleep(0.2)
         self.textbox.start_text(
             messages=[f"You found a {self.name}!"], func=self.apply_effect
         )
-

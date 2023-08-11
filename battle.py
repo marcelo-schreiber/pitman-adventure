@@ -125,7 +125,6 @@ class BattleCutscene(Cutscene):
             pygame.time.delay(delay)
             self.full_update()
 
-        
     def make_a_move(self, move: str):
         is_player_turn = self.turn % 2 == 0
 

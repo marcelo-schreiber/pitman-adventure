@@ -53,7 +53,6 @@ class Player(pygame.sprite.Sprite):
         self.talking_image = pygame.image.load("images/down.png").convert_alpha()
         self.moves = moves.copy()
 
-
         self.song = pygame.mixer.Sound("sounds/city.mp3")
         self.song.set_volume(0.3)
         self.song.play(-1)
@@ -117,9 +116,8 @@ class Player(pygame.sprite.Sprite):
 
             for sprite in is_colliding:
                 sprite.show_text()
-            
-            self.song.play(-1)
 
+            self.song.play(-1)
 
     def heal(self):
         self.hp += 10
@@ -164,9 +162,9 @@ class Player(pygame.sprite.Sprite):
         self.battle_song.stop()
         self.song.play(-1)
 
-        if (cutscene.winner == "player"):
+        if cutscene.winner == "player":
             self.wins += 1
-            self.increase_accuracy() 
+            self.increase_accuracy()
 
     def update(self):
         self.input()

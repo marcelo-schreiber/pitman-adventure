@@ -13,7 +13,10 @@ villager_1 = [
     "I hope you find it soon...",
 ]
 
-villager_2 = ["Binder: I've heard the news, Arthur.", "Binder: Do you think she got lost?"]
+villager_2 = [
+    "Binder: I've heard the news, Arthur.",
+    "Binder: Do you think she got lost?",
+]
 
 villager_3 = [
     "Fenoxer: I'm so sorry for what happened.",

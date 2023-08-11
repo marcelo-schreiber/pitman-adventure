@@ -91,7 +91,9 @@ class Level:
 
                     if style == "item":
                         random_effect = random.choice(list(effects.keys()))
-                        random_surface_effect = pygame.image.load(f'graphics/objects/{random_effect}.png').convert_alpha()
+                        random_surface_effect = pygame.image.load(
+                            f"graphics/objects/{random_effect}.png"
+                        ).convert_alpha()
 
                         Item(
                             (x, y),
