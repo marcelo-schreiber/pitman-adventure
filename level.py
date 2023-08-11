@@ -46,16 +46,24 @@ class Level:
 
     def create_npc(self):
         groups = [self.visible_sprites, self.npc_sprites]
-        Npc(groups, (9, 10), "spirit", villager_1)
-        Npc(groups, (7, 15), "binder", villager_2)
+
+        # signs
         Npc(self.npc_sprites, (18, 26), "spirit", sign_a)
         Npc(self.npc_sprites, (29, 17), "spirit", sign_b)
         Npc(self.npc_sprites, (29, 32), "spirit", sign_c)
         Npc(self.npc_sprites, (13, 42), "spirit", sign_d)
 
-        Npc(groups, (15, 11), "fenoxer", villager_3)
+        
+        # npcs
+        Npc(groups, (9, 10), "spirit", villager_1)
+        Npc(groups, (15, 11), "fenoxer", fenoxer)
+        Npc(groups, (7, 15), "binder", binder)
+        Npc(groups, (15, 45), "careu", careu)
+
+        # gym trainers (enemies)
         GymTrainer(groups, (8, 32), "leo", leo, self.player)
         GymTrainer(groups, (12, 45), "daniel", daniel, self.player)
+        GymTrainer(groups, (30, 45), "fenoxer_muie", fenoxer_muie, self.player)
 
     def create_map(self):
         layouts = {  # list of layouts (collision, visuals, etc)

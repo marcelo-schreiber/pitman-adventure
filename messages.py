@@ -13,14 +13,24 @@ villager_1 = [
     "I hope you find it soon...",
 ]
 
-villager_2 = [
+binder = [
     "Binder: I've heard the news, Arthur.",
     "Binder: Do you think she got lost?",
 ]
 
-villager_3 = [
+fenoxer = [
     "Fenoxer: I'm so sorry for what happened.",
     "Fenoxer: Maybe she went for walk in Parque Barigui!",
+]
+
+fenoxer_muie = [
+    "Fenoxer: I'm so sorry for what happened.",
+    "Fenoxer: ",
+]
+
+careu = [
+    "Careu: I'm sorry to hear that, Arthur.",
+    "Careu: My boyfriend loves pizza, maybe he could help.",
 ]
 
 sign_a = ["Mezosoic Kingdom"]
@@ -58,4 +68,10 @@ daniel = [
     "Arthur: No, I need your help",
     "Arthur: Can I have your pizza to lure my Eevee?",
     "Daniel: Over my dead body!",
+]
+
+fenoxer_muie = [
+    "Fenoxer: I'm gonna sell this Eevee",
+    "Fenoxer: I need to save up for my surgery",
+    "Fenoxer: Let's battle over it"
 ]
