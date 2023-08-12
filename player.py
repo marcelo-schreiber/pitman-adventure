@@ -33,9 +33,7 @@ class Player(pygame.sprite.Sprite):
         # do not count sign as npc (sprite.name is 'sign')
         self.wins = []
         self.npcs_interacted = []
-        self.total_npcs = len(
-            [sprite for sprite in self.npc_sprites if sprite.name != "sign"]
-        )
+        self.total_npcs = 0
 
         self.images = {
             "down": pygame.transform.scale(
@@ -145,12 +143,12 @@ class Player(pygame.sprite.Sprite):
     def npc_interaction(self):
         npcs_collided = pygame.sprite.spritecollide(self, self.npc_sprites, False)
 
-        if npcs_collided and self.can_interact:
-            for npc in npcs_collided:
-                npc.begin_interaction()
-
-                if npc.name not in self.npcs_interacted:
-                    self.npcs_interacted.append(npc.name)
+        if npcs_collided:
+            if self.can_interact:
+                for npc in npcs_collided:
+                    npc.begin_interaction()
+                    if npc not in self.npcs_interacted and npc.name != "sign":
+                        self.npcs_interacted.append(npc)
 
                 self.can_interact = False
         else:
@@ -177,13 +175,18 @@ class Player(pygame.sprite.Sprite):
                 self.wins.append(name)  # add the name to the list of wins
 
     def interacted_with_all_npcs(self):
-        return len(self.npcs_interacted) == self.total_npcs
+        return len(self.npcs_interacted) >= self.total_npcs
 
     def update(self):
         self.input()
         self.move(self.speed)
         self.random_encounter()
         self.npc_interaction()
+
+        if self.total_npcs == 0:
+            for sprite in self.npc_sprites:
+                if sprite.name != "sign":
+                    self.total_npcs += 1  
 
         if len(self.wins) >= 3 and self.interacted_with_all_npcs():  # TODO: remove harcoded value
             self.song.stop()
