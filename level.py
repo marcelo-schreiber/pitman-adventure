@@ -59,10 +59,10 @@ class Level:
         groups = [self.visible_sprites, self.npc_sprites]
 
         # signs
-        Npc(self.npc_sprites, (18, 26), "spirit", sign_a)
-        Npc(self.npc_sprites, (29, 17), "spirit", sign_b)
-        Npc(self.npc_sprites, (29, 32), "spirit", sign_c)
-        Npc(self.npc_sprites, (13, 42), "spirit", sign_d)
+        Npc(self.npc_sprites, (18, 26), "sign", sign_a)
+        Npc(self.npc_sprites, (29, 17), "sign", sign_b)
+        Npc(self.npc_sprites, (29, 32), "sign", sign_c)
+        Npc(self.npc_sprites, (13, 42), "sign", sign_d)
 
         # npcs
         Npc(groups, (9, 10), "orange", orange)
