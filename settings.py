@@ -32,6 +32,6 @@ player_specific_moves = {
 
 player_specific_hp = {
     "leo": 60,
-    "daniel": 120,
+    "daniel": 115,
     "fenoxer_muie": 45,
 }
