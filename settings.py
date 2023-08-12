@@ -14,7 +14,7 @@ default_moves = moves.copy()
 
 player_specific_moves = {
     "leo": {
-        "weak": {"name": "Blue", "damage": 15, "accuracy": 0.90},
+        "weak": {"name": "Blue", "damage": 15, "accuracy": 0.92},
         "strong": {"name": "Dinosaur", "damage": 20, "accuracy": 0.7},
         "heal": {"name": "Autism", "damage": -20, "accuracy": 0.7},
     },
@@ -25,13 +25,13 @@ player_specific_moves = {
     },
     "fenoxer_muie": {
         "weak": {"name": "Femboy hips", "damage": 10, "accuracy": 0.95},
-        "strong": {"name": "Dwarven might", "damage": 45, "accuracy": 0.5},
+        "strong": {"name": "Dwarven might", "damage": 65, "accuracy": 0.5},
         "heal": {"name": "Ruacutan", "damage": -20, "accuracy": 0.75},
     },
 }
 
 player_specific_hp = {
-    "leo": 60,
+    "leo": 65,
     "daniel": 115,
     "fenoxer_muie": 45,
 }
