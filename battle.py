@@ -62,14 +62,14 @@ class BattleCutscene(Cutscene):
 
     def attack(
         self,
-        move: str,
+        move_str: str,
         attacker: pygame.sprite.Sprite,
         defender: pygame.sprite.Sprite,
     ) -> str:
         accuracy = random()
 
         move = attacker.moves[
-            move
+            move_str
         ]  # get the move from the attacker, so in the future we can have different moves for different enemies and players
 
         is_heal = move["damage"] < 0
@@ -87,7 +87,7 @@ class BattleCutscene(Cutscene):
             else:
                 defender.hp -= move["damage"]
                 self.animate_move_and_stop_text(
-                    move["name"], (defender.rect.centerx, defender.rect.centery), 50
+                    move_str, (defender.rect.centerx, defender.rect.centery), 50
                 )
                 return (
                     f'{attacker.name} used {move["name"]} for {move["damage"]} damage!'
@@ -113,12 +113,10 @@ class BattleCutscene(Cutscene):
         width=2 * TILESIZE,
         height=2 * TILESIZE,
     ):
+        print(f"Animating {move} move")
         sprites = import_folder(
             f"graphics/particles/{move.lower()}"
         )  # lowercase the move name, only works on windows
-
-        if not sprites:
-            sprites = import_folder(f"graphics/particles/medium")
 
         try:
             pygame.mixer.music.load(f"sounds/{move.lower()}.mp3")
