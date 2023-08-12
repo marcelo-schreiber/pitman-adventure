@@ -20,6 +20,9 @@ class MainMenu(Cutscene):
             "images/eevee.png", WIDTH // 2 - 25, HEIGHT - 200, 200, 200
         )
 
+        self.song = pygame.mixer.Sound("sounds/mainmenu.mp3")
+        self.song.play(-1)
+
     def background(self, image: str):
         new_img = pygame.image.load("images/mainmenu.jpg").convert_alpha()
         new_img = pygame.transform.scale(new_img, (WIDTH, HEIGHT))
@@ -39,3 +42,4 @@ class MainMenu(Cutscene):
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 self.is_running = False
+                self.song.stop()

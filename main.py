@@ -13,6 +13,7 @@ class Game:
         pygame.mixer.music.set_volume(0.7)
 
         pygame.display.set_caption("Pitman adventure: finding eevee")
+        pygame.display.set_icon(pygame.image.load("images/down.png"))
 
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         self.clock = pygame.time.Clock()
