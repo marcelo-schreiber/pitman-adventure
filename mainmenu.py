@@ -26,5 +26,9 @@ class MainMenu(Cutscene):
     
     def handle_events(self):
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.is_running = False
+                pygame.quit()
+                sys.exit()
             if event.type == pygame.KEYDOWN:
                 self.is_running = False
