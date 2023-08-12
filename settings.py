@@ -4,28 +4,34 @@ FPS = 60
 TILESIZE = 90
 
 moves = {
-    "weak": {"name": "Weak", "damage": 10, "accuracy": 0.95},
-    "medium": {"name": "Medium", "damage": 15, "accuracy": 0.8},
-    "strong": {"name": "Strong", "damage": 20, "accuracy": 0.7},
-    "heal": {"name": "Heal", "damage": -20, "accuracy": 0.7},
+    "weak": {"name": "Fox swipes", "damage": 10, "accuracy": 0.90},
+    "medium": {"name": "Medium", "damage": 15, "accuracy": 0.75},
+    "strong": {"name": "Fuckery", "damage": 20, "accuracy": 0.52},
+    "heal": {"name": "Heal", "damage": -20, "accuracy": 0.55},
 }
 
 default_moves = moves.copy()
 
 player_specific_moves = {
     "leo": {
-        "weak": {"name": "Blue", "damage": 10, "accuracy": 0.95},
-        "strong": {"name": "Dinosaur", "damage": 20, "accuracy": 0.7},
+        "weak": {"name": "Blue", "damage": 15, "accuracy": 0.95},
+        "strong": {"name": "Dinosaur", "damage": 20, "accuracy": 0.77},
         "heal": {"name": "Autism", "damage": -20, "accuracy": 0.7},
     },
     "daniel": {
         "weak": {"name": "Sketch", "damage": 10, "accuracy": 0.95},
-        "strong": {"name": "Full render", "damage": 20, "accuracy": 0.7},
+        "strong": {"name": "Full render", "damage": 20, "accuracy": 0.75},
         "heal": {"name": "Sleep", "damage": -20, "accuracy": 0.7},
     },
     "fenoxer_muie" : {
         "weak": {"name": "Femboy hips", "damage": 10, "accuracy": 0.95},
-        "strong": {"name": "Dwarven might", "damage": 20, "accuracy": 0.7},
-        "heal": {"name": "Ruacutan", "damage": -20, "accuracy": 0.7},
+        "strong": {"name": "Dwarven might", "damage": 45, "accuracy": 0.5},
+        "heal": {"name": "Ruacutan", "damage": -20, "accuracy": 0.75},
     }
+}
+
+player_specific_hp = {
+    "leo": 80,
+    "daniel": 120,
+    "fenoxer_muie": 45,
 }

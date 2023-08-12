@@ -1,6 +1,6 @@
 import pygame
 from textbox import *
-from settings import TILESIZE
+from settings import *
 
 
 class Npc(pygame.sprite.Sprite):
@@ -15,6 +15,7 @@ class Npc(pygame.sprite.Sprite):
         self.name = name
         self.textbox = Textbox()
         self.after_text_func = after_text_func
+
     def begin_interaction(self):
         self.textbox.start_text(
             messages=self.messages, func=self.after_text_func ,icon=f"graphics/icons/{self.name.lower()}_icon.png"
@@ -37,6 +38,6 @@ class GymTrainer(Npc):
     def begin_interaction(self):
         self.textbox.start_text(
             messages=self.messages,
-            func=lambda: self.player.battle(self.imageurl, self.name),
+            func=lambda: self.player.battle(self.imageurl, self.name, player_specific_hp[self.name.lower()]),
             icon=f"graphics/icons/{self.name.lower()}_icon.png",
         )
