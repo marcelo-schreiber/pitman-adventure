@@ -3,6 +3,7 @@ import pygame
 from settings import *
 import sys
 
+
 class WinCutscene(Cutscene):
     def __init__(self):
         super().__init__()
@@ -19,7 +20,7 @@ class WinCutscene(Cutscene):
 
     def update(self):
         self.handle_events()
-    
+
     def handle_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -29,4 +30,3 @@ class WinCutscene(Cutscene):
 
             if event.type == pygame.KEYDOWN:
                 self.is_running = False
-

@@ -20,7 +20,7 @@ class Player(pygame.sprite.Sprite):
         self.name = "Arthur"
         self.grass_sprites = grass_sprites
         self.direction = pygame.math.Vector2()
-        self.speed = 6 
+        self.speed = 6
 
         self.obstacle_sprites = obstacle_sprites
         self.chance_of_encounter_per_tick = 1 / (
@@ -164,7 +164,7 @@ class Player(pygame.sprite.Sprite):
 
         if cutscene.winner == "player":
             if name not in self.wins:
-                self.wins.append(name) # add the name to the list of wins
+                self.wins.append(name)  # add the name to the list of wins
 
     def update(self):
         self.input()
@@ -172,7 +172,7 @@ class Player(pygame.sprite.Sprite):
         self.random_encounter()
         self.npc_interaction()
 
-        if len(self.wins) >= 3: # TODO: remove harcoded value
+        if len(self.wins) >= 3:  # TODO: remove harcoded value
             self.song.stop()
             cutscene = WinCutscene()
             cutscene.play()
