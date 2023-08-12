@@ -146,7 +146,7 @@ class Cutscene:
                     pygame.quit()
                     quit()
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE or event.key == pygame.K_RETURN:
+                    if event.key == pygame.K_ESCAPE:
                         self.is_running = False
 
             self.full_update()

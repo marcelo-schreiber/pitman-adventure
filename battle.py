@@ -18,7 +18,7 @@ class BattleCutscene(Cutscene):
     ) -> None:
         super().__init__()
         self.player_sprite = player
-
+        self.cursor_timer = 0
         self.player = self.create_actor(
             player_img, 350, 500, 100, 100, player.hp, player.name
         )
@@ -32,6 +32,7 @@ class BattleCutscene(Cutscene):
         self.winner = None
         self.text_box = Textbox()
         self.action_text = ""
+        self.cursor = self.create_text(">", 875, 500, "white")
 
     def moves_text_initial(self):
         self.create_text("Choose your move:", 1000, 450, "white")
@@ -40,17 +41,50 @@ class BattleCutscene(Cutscene):
         self.create_text("3. Strong", 1000, 600, "white")
         self.create_text("4. Heal", 1000, 650, "white")
 
-    @staticmethod
-    def get_player_input():
+    def drop_cursor(self):
+        if self.cursor.y >= 650:
+            self.cursor.y = 500
+        else:
+            self.cursor.y += 50
+
+    def jump_cursor(self):
+        if self.cursor.y <= 500:
+            self.cursor.y = 650
+        else:
+            self.cursor.y -= 50
+
+    def cursor_y_to_move(self):
+        if self.cursor.y == 500:
+            return "weak"
+        elif self.cursor.y == 550:
+            return "medium"
+        elif self.cursor.y == 600:
+            return "strong"
+        elif self.cursor.y == 650:
+            return "heal"
+
+    def get_player_input(self):
         keys = pygame.key.get_pressed()
+
+        # movement
+        print(self.cursor_timer)
+        if keys[pygame.K_DOWN] and self.cursor_timer > 15:
+            self.drop_cursor()
+            self.cursor_timer = 0
+        elif keys[pygame.K_UP] and self.cursor_timer > 15:
+            self.jump_cursor()
+            self.cursor_timer = 0
+
+        if keys[pygame.K_RETURN]:
+            return self.cursor_y_to_move()
 
         if keys[pygame.K_1]:
             return "weak"
-        elif keys[pygame.K_2]:
+        if keys[pygame.K_2]:
             return "medium"
-        elif keys[pygame.K_3]:
+        if keys[pygame.K_3]:
             return "strong"
-        elif keys[pygame.K_4]:
+        if keys[pygame.K_4]:
             return "heal"
         else:
             return None
@@ -161,6 +195,9 @@ class BattleCutscene(Cutscene):
 
     def update(self):
         move = self.get_player_input()
+
+        if self.cursor_timer <= 15:
+            self.cursor_timer += 1
 
         self.make_a_move(move)
 
