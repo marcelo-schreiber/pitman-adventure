@@ -5,7 +5,7 @@ TILESIZE = 90
 
 moves = {
     "weak": {"name": "Fox swipes", "damage": 10, "accuracy": 0.90},
-    "medium": {"name": "Nouveau slash", "damage": 15, "accuracy": 0.75},
+    "medium": {"name": "Earth bending", "damage": 15, "accuracy": 0.75},
     "strong": {"name": "Fuckery", "damage": 20, "accuracy": 0.52},
     "heal": {"name": "Healing spit", "damage": -20, "accuracy": 0.55},
 }

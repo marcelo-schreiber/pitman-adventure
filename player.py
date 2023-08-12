@@ -172,7 +172,7 @@ class Player(pygame.sprite.Sprite):
         self.random_encounter()
         self.npc_interaction()
 
-        if len(self.wins) == 0: # TODO: remove harcoded value
+        if len(self.wins) >= 3: # TODO: remove harcoded value
             self.song.stop()
             cutscene = WinCutscene()
             cutscene.play()
