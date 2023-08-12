@@ -5,9 +5,9 @@ TILESIZE = 90
 
 moves = {
     "weak": {"name": "Fox swipes", "damage": 10, "accuracy": 0.90},
-    "medium": {"name": "Medium", "damage": 15, "accuracy": 0.75},
+    "medium": {"name": "Nouveau slash", "damage": 15, "accuracy": 0.75},
     "strong": {"name": "Fuckery", "damage": 20, "accuracy": 0.52},
-    "heal": {"name": "Heal", "damage": -20, "accuracy": 0.55},
+    "heal": {"name": "Healing spit", "damage": -20, "accuracy": 0.55},
 }
 
 default_moves = moves.copy()
