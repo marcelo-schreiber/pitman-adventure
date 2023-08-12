@@ -1,7 +1,7 @@
 WIDTH = 1280
 HEIGHT = 720
 FPS = 60
-TILESIZE = 85
+TILESIZE = 90
 
 moves = {
     "weak": {"name": "Weak", "damage": 10, "accuracy": 0.95},
