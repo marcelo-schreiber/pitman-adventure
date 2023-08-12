@@ -14,15 +14,17 @@ villager_1 = [
 ]
 
 binder = [
-    "Binder: I've heard the news, Arthur.",
+    "Binder: Hej Hej, I've heard the news, Arthur.",
     "Binder: Do you think she got lost?",
+    "Binder: CSens?",
 ]
 
 fenoxer = [
     "Fenoxer: I'm so sorry for what happened.",
     "Fenoxer: Maybe she went for walk in Parque Barigui!",
+    "Fenoxer: Você só é assaltado se você estiver desatento, burro",
+    "Fenoxer: ou sem cigarro.",
 ]
-
 
 sign_a = ["Mezosoic Kingdom"]
 
