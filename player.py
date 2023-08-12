@@ -11,13 +11,13 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.image.load("images/down.png").convert_alpha()
         self.image = pygame.transform.scale(self.image, (TILESIZE, TILESIZE))
         self.rect = self.image.get_rect(topleft=pos)
-        self.hitbox = self.rect.inflate(0, -26)
+        self.hitbox = self.rect.inflate(-13, -26)
         self.hp = 100
         self.max_hp = 100
         self.name = "Arthur"
         self.grass_sprites = grass_sprites
         self.direction = pygame.math.Vector2()
-        self.speed = 12
+        self.speed = 6
 
         self.obstacle_sprites = obstacle_sprites
         self.chance_of_encounter_per_tick = 1 / (
