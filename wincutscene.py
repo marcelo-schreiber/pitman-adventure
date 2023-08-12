@@ -29,4 +29,5 @@ class WinCutscene(Cutscene):
                 sys.exit()
 
             if event.type == pygame.KEYDOWN:
-                self.is_running = False
+                if event.key == pygame.K_RETURN:
+                    self.is_running = False
