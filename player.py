@@ -1,4 +1,7 @@
 import pygame
+import sys
+from credits import Credits
+from wincutscene import WinCutscene
 from settings import *
 from random import randint
 from enemy import Enemy
@@ -17,7 +20,7 @@ class Player(pygame.sprite.Sprite):
         self.name = "Arthur"
         self.grass_sprites = grass_sprites
         self.direction = pygame.math.Vector2()
-        self.speed = 6
+        self.speed = 6 
 
         self.obstacle_sprites = obstacle_sprites
         self.chance_of_encounter_per_tick = 1 / (
@@ -26,7 +29,8 @@ class Player(pygame.sprite.Sprite):
 
         self.npc_sprites = npc_sprites
         self.can_interact = True
-        self.wins = 0
+        self.wins = []
+
         self.images = {
             "down": pygame.transform.scale(
                 pygame.image.load("images/down.png").convert_alpha(),
@@ -159,11 +163,22 @@ class Player(pygame.sprite.Sprite):
         self.song.play(-1)
 
         if cutscene.winner == "player":
-            self.wins += 1
-            self.increase_accuracy()
+            if name not in self.wins:
+                self.wins.append(name) # add the name to the list of wins
 
     def update(self):
         self.input()
         self.move(self.speed)
         self.random_encounter()
         self.npc_interaction()
+
+        if len(self.wins) == 0: # TODO: remove harcoded value
+            self.song.stop()
+            cutscene = WinCutscene()
+            cutscene.play()
+
+            creds = Credits()
+            creds.play()
+
+            pygame.quit()
+            sys.exit()

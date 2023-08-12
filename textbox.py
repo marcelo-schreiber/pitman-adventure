@@ -122,7 +122,6 @@ class Textbox(metaclass=TSingletonMeta):
                 icon = pygame.image.load(self.icon).convert_alpha()
                 icon = pygame.transform.scale(icon, (144, 144))
                 self.display_surface.blit(icon, (0, 0))
-                print(e)
 
             self.display_surface.blit(text_surface, (165, 60))
         else:

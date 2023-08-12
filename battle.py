@@ -78,7 +78,12 @@ class BattleCutscene(Cutscene):
             # hit
             if is_heal:
                 # heal
-                attacker.hp -= move["damage"]
+                if attacker.hp - move["damage"] > attacker.max_hp:
+                    if attacker.hp == attacker.max_hp:
+                        return f"{attacker.name} is already at full health!"
+                    attacker.hp = attacker.max_hp
+                else:
+                    attacker.hp -= move["damage"]
 
                 self.animate_move_and_stop_text(
                     "heal", (attacker.rect.centerx, attacker.rect.centery), 50

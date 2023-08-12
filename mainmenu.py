@@ -1,6 +1,7 @@
 from settings import *
 from cutscene import Cutscene
 import pygame
+import sys
 
 
 class MainMenu(Cutscene):

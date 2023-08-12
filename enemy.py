@@ -12,5 +12,11 @@ class Enemy:
 
     def attack(self) -> str:
         # pick random move
+
         move = choice(list(self.moves.keys()))
+        
+        if self.max_hp == self.hp:
+            while move == "heal":
+                move = choice(list(self.moves.keys())) # lmao this is so bad, but it works
+
         return move
