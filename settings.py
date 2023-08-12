@@ -23,11 +23,11 @@ player_specific_moves = {
         "strong": {"name": "Full render", "damage": 20, "accuracy": 0.75},
         "heal": {"name": "Sleep", "damage": -20, "accuracy": 0.7},
     },
-    "fenoxer_muie" : {
+    "fenoxer_muie": {
         "weak": {"name": "Femboy hips", "damage": 10, "accuracy": 0.95},
         "strong": {"name": "Dwarven might", "damage": 45, "accuracy": 0.5},
         "heal": {"name": "Ruacutan", "damage": -20, "accuracy": 0.75},
-    }
+    },
 }
 
 player_specific_hp = {

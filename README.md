@@ -12,20 +12,13 @@ A Pokemon clone made with python and pygame
 - [x] Create a map loader
 - [x] Create a random encounter system
 - [x] Create a battle system
-- [ ] Add sprites
+- [x] Add sprites
 - [ ] Animation system
-- [ ] Create a player upgrade system
-- [ ] Create a menu
-- [ ] Create a save system
-- [ ] Create a level system
-- [ ] Create a level loader
-- [ ] Create level 1
-- [ ] Create level 2
-- [ ] Create level 3
-- [ ] Add music
-- [ ] Add sound effects
+- [x] Create a player upgrade system
+- [x] Create a menu
+- [x] Create a level system
+- [x] Add music
+- [x] Add sound effects
 - [ ] Add pause
-- [ ] Add cutscenes
-- [ ] Credits
-
-![Auto formate code](https://github.com/marcelo-schreiber/pitman-adventure/workflows/Auto%20formate%20code/badge.svg)
+- [x] Add cutscenes
+- [x] Credits

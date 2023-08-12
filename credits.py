@@ -3,6 +3,7 @@ from cutscene import Cutscene
 import sys
 from settings import *
 
+
 class Credits(Cutscene):
     def __init__(self):
         super().__init__()
@@ -29,7 +30,7 @@ class Credits(Cutscene):
 
     def update(self):
         for text in self.texts:
-            text.y -= 2 
+            text.y -= 2
 
         self.y += 1
 
@@ -37,6 +38,3 @@ class Credits(Cutscene):
             self.is_running = False
             pygame.quit()
             sys.exit()
-    
-
-

@@ -47,7 +47,6 @@ class Cutscene:
             self.alpha = alpha
             self.y = y
             self.color = color
-        
 
     def create_actor(
         self,
@@ -88,7 +87,7 @@ class Cutscene:
         for i in self.texts:
             if self.displaying_specific_text and i.text == self.specific_text:
                 continue  # Skip drawing the specific text if displaying_specific_text is True
-            
+
             text_surf = self.font.render(i.text, True, i.color)
             text_surf.set_alpha(i.alpha)
 
@@ -96,7 +95,7 @@ class Cutscene:
                 text_surf,
                 self.calculate_text_position(i.text, i.x, i.y),
             )
-    
+
     def create_text(self, string, x: int, y: int, color: str):
         text = self.Text(string, x, y, color)
         self.texts.append(text)
