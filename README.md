@@ -2,7 +2,7 @@
 
 ## Project description
 
-A Pokemon clone made with python and pygame
+A minimal Pokemon clone made with python and pygame
 
 ## Todo list
 
@@ -13,7 +13,6 @@ A Pokemon clone made with python and pygame
 - [x] Create a random encounter system
 - [x] Create a battle system
 - [x] Add sprites
-- [ ] Animation system
 - [x] Create a player upgrade system
 - [x] Create a menu
 - [x] Create a level system
@@ -22,3 +21,4 @@ A Pokemon clone made with python and pygame
 - [ ] Add pause
 - [x] Add cutscenes
 - [x] Credits
+- [ ] Refactor to OOP principals
