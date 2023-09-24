@@ -7,9 +7,6 @@ from settings import *
 
 class Game:
     def __init__(self):
-        pygame.init()
-        pygame.mixer.init()
-
         pygame.mixer.music.set_volume(0.7)
 
         pygame.display.set_caption("Pitman adventure: finding eevee")

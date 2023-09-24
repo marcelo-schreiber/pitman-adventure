@@ -1,3 +1,6 @@
+import pygame
+pygame.init()
+
 WIDTH = 1280
 HEIGHT = 720
 FPS = 60
@@ -9,6 +12,8 @@ moves = {
     "strong": {"name": "Fuckery", "damage": 20, "accuracy": 0.52},
     "heal": {"name": "Healing spit", "damage": -20, "accuracy": 0.55},
 }
+
+main_song = pygame.mixer.Sound("sounds/battle.mp3")
 
 default_moves = moves.copy()
 
