@@ -1,4 +1,4 @@
-# Pitman adventure
+# Pitman adventure 🏞️
 
 An adventure game inspired by pokemon and zelda.
 
