@@ -1,6 +1,9 @@
 import pygame
 pygame.init()
 
+# command to generate .exe file:
+# python -m PyInstaller --onefile --windowed --noconsole main.py
+
 WIDTH = 1280
 HEIGHT = 720
 FPS = 60
