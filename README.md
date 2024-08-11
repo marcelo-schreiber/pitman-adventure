@@ -6,11 +6,11 @@ An adventure game inspired by pokemon and zelda.
 
 - Main map
 
-![Main map](https://cdn.discordapp.com/attachments/685226653764550671/1155607952854614136/image.png)
+![Map](https://github.com/marcelo-schreiber/pitman-adventure/blob/master/images/map.png?raw=true)
 
 - Battle
 
-![Battle](https://cdn.discordapp.com/attachments/685226653764550671/1155608179766460487/image.png)
+![Battle](https://github.com/marcelo-schreiber/pitman-adventure/blob/master/images/battle.png?raw=true)
 
 ## How to run the game
 
@@ -57,7 +57,5 @@ If you want to generate a new .exe, check the 'settings.py' file.
 - [x] Create a level system
 - [x] Add music
 - [x] Add sound effects
-- [ ] Add pause
 - [x] Add cutscenes
 - [x] Credits
-- [ ] Refactor to OOP principals
