@@ -37,7 +37,7 @@ pip install pygame
 
 If you want to generate a new .exe, check the 'settings.py' file.
 
-## Funcionalidades
+## Features
 
 - Battle system
 - Power ups
